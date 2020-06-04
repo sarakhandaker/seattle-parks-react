@@ -33,13 +33,13 @@ code {
 
   .form-style input{
     border:0;
-    height:50px;
+    height:40px;
     border-radius:0;
   border-bottom:1px solid #ebebeb;	
   }
 
   .form-style input:focus{
-  border-bottom:1px solid #6B9080;	
+  border-bottom:1px solid #DB7C00;	
   box-shadow:none;
   outline:0;
   background-color:#ebebeb;	
@@ -54,7 +54,7 @@ code {
     color:#ccc;
   }
 
-  button{height:50px;	}
+  button{height:40px;	}
 
   .sideline:before, .sideline:after {
       content: '';
