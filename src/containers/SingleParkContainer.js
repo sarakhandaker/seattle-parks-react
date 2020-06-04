@@ -4,6 +4,7 @@ import Rating from '../components/Rating'
 
 export class SingleParkContainer extends Component {
     render() {
+      console.log("hi")
         return (
             <div className="container">
               <div class="row">

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import AuthHOC from '../HOCs/AuthHOC'
 
 export class UserHomeContainer extends Component {
     render() {
@@ -10,4 +11,4 @@ export class UserHomeContainer extends Component {
     }
 }
 
-export default UserHomeContainer
+export default AuthHOC(UserHomeContainer)

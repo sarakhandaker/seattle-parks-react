@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
-import {Route} from 'react-router-dom'
-import SinglePark from '../containers/SingleParkContainer'
 
 export class ParkList extends Component {
 
@@ -31,7 +29,6 @@ export class ParkList extends Component {
                    {this.makeLi()}
                 </ul>
             </div>
-            <Route path={`parks/:parkId`} render={props => <SinglePark {...props} parks={this.props.parks} />}/>
     	</div >
         )
     }

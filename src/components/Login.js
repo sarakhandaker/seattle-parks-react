@@ -8,7 +8,19 @@ export class Login extends Component {
         usernameSignup: "",
         passwordSignup: "",
         addressSignup: "",
-        emailSignup: ""
+        emailSignup: "",
+        message: "",
+        error:""
+    }
+
+    signupErrors(){
+        if (this.state.error){
+        const keys=Object.keys(this.state.error)
+       return keys.map( (key,i)=> <h6 key={i}>{key}: {this.state.error[key]} </h6>)
+       }
+       else {
+           return null
+       }
     }
 
     handleChange = (event) => {
@@ -34,9 +46,14 @@ export class Login extends Component {
             })
         })
             .then(r => r.json())
-            .then(json => {
-                this.storeToken(json)
-                this.props.history.push('/home')
+            .then(res => {
+                if (res.message) {
+                    this.setState({ message: res.message })
+                }
+                else {
+                    this.storeToken(res)
+                    this.props.history.push('/home')
+                }
             })
     }
 
@@ -59,9 +76,14 @@ export class Login extends Component {
             })
         })
             .then(r => r.json())
-            .then(json => {
-                this.storeToken(json)
-                this.props.history.push('/home')
+            .then(res => {
+                if (res.error) {
+                    this.setState({ error: res.error })
+                }
+                else {
+                    this.storeToken(res)
+                    this.props.history.push('/home')
+                }
             })
     }
 
@@ -71,7 +93,7 @@ export class Login extends Component {
     }
 
     render() {
-        const {emailLogin, emailSignup, usernameSignup, passwordLogin, passwordSignup, addressSignup}=this.state
+        const { emailLogin, emailSignup, usernameSignup, passwordLogin, passwordSignup, addressSignup } = this.state
         return (
             <div className="container">
                 <div className="row m-5 no-gutters shadow-lg">
@@ -83,7 +105,7 @@ export class Login extends Component {
                         <div className="form-style">
                             <form onSubmit={this.handleLogin}>
                                 <div className="form-group">
-                                    <input type="email" placeholder="Email" className="form-control" name="emailLogin" value={emailLogin} onChange={this.handleChange}/>
+                                    <input type="email" placeholder="Email" className="form-control" name="emailLogin" value={emailLogin} onChange={this.handleChange} />
                                 </div>
                                 <div className="form-group">
                                     <input type="password" placeholder="Password" className="form-control" name="passwordLogin" value={passwordLogin} onChange={this.handleChange} />
@@ -92,27 +114,33 @@ export class Login extends Component {
                                     <button type="submit" className="btn w-100 font-weight-bold mt-2 btn-lg login-btn">Login</button>
                                 </div>
                             </form>
+                            <div className="text-center text-gray">
+                                <h6>{this.state.message}</h6>
+                            </div>
                         </div>
                         <div className="sideline p-2">OR</div>
                         <h3>New Users</h3>
                         <div className="form-style">
                             <form onSubmit={this.handleCreateUser}>
                                 <div className="form-group">
-                                    <input type="text" placeholder="Username" className="form-control" name="usernameSignup" value={usernameSignup} onChange={this.handleChange}/>
+                                    <input type="text" placeholder="Username" className="form-control" name="usernameSignup" value={usernameSignup} onChange={this.handleChange} />
                                 </div>
                                 <div className="form-group">
-                                    <input type="text" placeholder="Address" className="form-control" name="addressSignup" value={addressSignup} onChange={this.handleChange}/>
+                                    <input type="text" placeholder="Address" className="form-control" name="addressSignup" value={addressSignup} onChange={this.handleChange} />
                                 </div>
                                 <div className="form-group">
-                                    <input type="email" placeholder="Email" className="form-control" name="emailSignup" value={emailSignup} onChange={this.handleChange}/>
+                                    <input type="email" placeholder="Email" className="form-control" name="emailSignup" value={emailSignup} onChange={this.handleChange} />
                                 </div>
                                 <div className="form-group">
-                                    <input type="password" placeholder="Password" className="form-control" name="passwordSignup" value={passwordSignup} onChange={this.handleChange}/>
+                                    <input type="password" placeholder="Password" className="form-control" name="passwordSignup" value={passwordSignup} onChange={this.handleChange} />
                                 </div>
                                 <div className="pb-2">
                                     <button type="submit" className="btn w-100 font-weight-bold mt-2 btn-lg login-btn">Signup</button>
                                 </div>
                             </form>
+                            <div className="text-center text-gray">
+                                {this.signupErrors() }
+                            </div>
                         </div>
                     </div>
                 </div>
