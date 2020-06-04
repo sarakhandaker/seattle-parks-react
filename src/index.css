@@ -1,3 +1,4 @@
+/* #2A3C2B #2F4550 #6B9080 #A4C3B2 #F6FFF8 #DB7C00 */
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -10,4 +11,241 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.container {
+  padding-top: 10%;
+}
+
+/* ------------------------------------------------------
+-----------------------NAVBAR CSS------------------------
+------------------------------------------------------ */
+.custom-navbar{
+  z-index:;background-color: #A4C3B2;}
+
+.nav-link{
+  font-size: large;
+  color: #2A3C2B !important;}
+
+/* ------------------------------------------------------
+-----------------------LOGIN CSS-------------------------
+------------------------------------------------------ */
+
+  .form-style input{
+    border:0;
+    height:50px;
+    border-radius:0;
+  border-bottom:1px solid #ebebeb;	
+  }
+
+  .form-style input:focus{
+  border-bottom:1px solid #6B9080;	
+  box-shadow:none;
+  outline:0;
+  background-color:#ebebeb;	
+  }
+
+  .sideline {
+      display: flex;
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    color:#ccc;
+  }
+
+  button{height:50px;	}
+
+  .sideline:before, .sideline:after {
+      content: '';
+      border-top: 1px solid #ebebeb;
+      margin: 0 20px 0 0;
+      flex: 1 0 20px;
+  }
+  
+  .sideline:after {
+      margin: 0 0 0 20px;
+  }
+
+  .pb-2 { background-color: #A4C3B2 !important;}
+
+/* ------------------------------------------------------
+-----------------------Rating CSS-------------------------
+------------------------------------------------------ */
+
+.btn-grey{
+    background-color:#D8D8D8;
+	color:#FFF;
+}
+.rating-block{
+	background-color:#FAFAFA;
+	border:1px solid #EFEFEF;
+	padding:15px 15px 20px 15px;
+	border-radius:3px;
+}
+.bold{
+	font-weight:700;
+}
+.padding-bottom-7{
+	padding-bottom:7px;
+}
+
+.glyphicon-star{
+font-size: large;
+}
+.btn-sm, .btn-group-sm>.btn {
+  padding: 5px 10px;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 3px;
+}
+
+.btn-warning {
+  color: #fff;
+  background-color: #f0ad4e;
+  border-color: #eea236;
+}
+
+.btn-warning {
+  color: white !important;
+}
+
+.review-block{
+	background-color:#FAFAFA;
+	border:1px solid #EFEFEF;
+	padding:15px;
+	border-radius:3px;
+	margin-bottom:15px;
+}
+.review-block-name{
+	font-size:12px;
+	margin:10px 0;
+}
+.review-block-date{
+	font-size:12px;
+}
+.review-block-rate{
+	font-size:13px;
+	margin-bottom:15px;
+}
+.review-block-title{
+	font-size:15px;
+	font-weight:700;
+	margin-bottom:10px;
+}
+.review-block-description{
+	font-size:13px;
+}
+
+/* ------------------------------------------------------
+-----------------------Park List CSS---------------------
+------------------------------------------------------ */
+
+li {
+  list-style: none;
+}
+.park-list{
+  padding: 10px;
+  border-radius: 6px;
+  background-color: #2A3C2B;
+}
+
+.park-list ul li {
+  display: block;
+  margin-bottom: 12px;
+  color: #fff;
+  text-decoration: none;
+  -webkit-transition: 0.5s;
+  -o-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.park-list ul li a {
+  display: block;
+  color: #fff;
+  text-decoration: none;
+  -webkit-transition: 0.5s;
+  -o-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.park-list ul li a span.icon {
+  display: block;
+  font-size: 25px;
+  vertical-align: middle;
+  float: left;
+}
+
+.park-list ul li a span.text {
+  display: block;
+  font-size: 15px;
+  margin-left: 50px;
+  padding-top: 12px;
+}
+
+
+/* ------------------------------------------------------
+----------------Single Park CSS--------------------------
+------------------------------------------------------ */
+
+.con1 span{
+	font-weight:400;
+	color:#b6b6b6;
+	font-size:12px;
+	text-transform:uppercase;
+	padding-bottom:5px;
+	display:block;
+}
+
+.con1 h2{
+	font-weight:400;
+	color:#1a1a1a;
+	font-size:37px;
+	line-height:38px;
+	margin:0;
+	padding-bottom:10px;
+	margin-bottom:25px;
+}
+.con1{
+  padding-top:0px;
+  padding-bottom:50px;
+}
+
+.con1 .p{
+	font-weight:400;
+	color:#8a8a8al;
+	font-size:13px;
+	line-height:26px;
+}
+
+.tgcon{
+	float:left;
+	width:85%;
+}
+.tgcon span{
+	display:block;
+	font-weight:400;
+	color:#1a1a1a;
+	font-size:18px;
+}
+.tgcon p{
+	font-weight:400;
+	color:#8a8a8a;
+	font-size:13px;
+	line-height:26px;
+}
+.tags{
+	padding-top:60px;
+}
+.tg{
+	padding-bottom:45px;
+}
+.img3 img{
+	width:90%;
+	    height: 89vh;
+	border-radius:6px;
+	border:#e2e7ec solid 1px;
+	-webkit-box-shadow: 7px 6px 34px -9px rgba(144,155,165,0.48);
+-moz-box-shadow: 7px 6px 34px -9px rgba(144,155,165,0.48);
+box-shadow: 7px 6px 34px -9px rgba(144,155,165,0.48);
 }
