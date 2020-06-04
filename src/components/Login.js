@@ -73,44 +73,44 @@ export class Login extends Component {
     render() {
         const {emailLogin, emailSignup, usernameSignup, passwordLogin, passwordSignup, addressSignup}=this.state
         return (
-            <div class="container">
-                <div class="row m-5 no-gutters shadow-lg">
-                    <div class="col-md-6 d-none d-md-block">
-                        <img src={Photo} class="img-fluid" style={{ "min-height": "100%" }} alt="Gasworks Park" />
+            <div className="container">
+                <div className="row m-5 no-gutters shadow-lg">
+                    <div className="col-md-6 d-none d-md-block">
+                        <img src={Photo} className="img-fluid" style={{ "minHeight": "100%" }} alt="Gasworks Park" />
                     </div>
-                    <div class="col-md-6 bg-white p-5">
+                    <div className="col-md-6 bg-white p-5">
                         <h3>Returning Users</h3>
-                        <div class="form-style">
+                        <div className="form-style">
                             <form onSubmit={this.handleLogin}>
-                                <div class="form-group">
-                                    <input type="email" placeholder="Email" class="form-control" name="emailLogin" value={emailLogin} onChange={this.handleChange}/>
+                                <div className="form-group">
+                                    <input type="email" placeholder="Email" className="form-control" name="emailLogin" value={emailLogin} onChange={this.handleChange}/>
                                 </div>
-                                <div class="form-group">
-                                    <input type="password" placeholder="Password" class="form-control" name="passwordLogin" value={passwordLogin} onChange={this.handleChange} />
+                                <div className="form-group">
+                                    <input type="password" placeholder="Password" className="form-control" name="passwordLogin" value={passwordLogin} onChange={this.handleChange} />
                                 </div>
-                                <div class="pb-2">
-                                    <button type="submit" class="btn w-100 font-weight-bold mt-2 btn-lg login-btn">Login</button>
+                                <div className="pb-2">
+                                    <button type="submit" className="btn w-100 font-weight-bold mt-2 btn-lg login-btn">Login</button>
                                 </div>
                             </form>
                         </div>
-                        <div class="sideline p-2">OR</div>
+                        <div className="sideline p-2">OR</div>
                         <h3>New Users</h3>
-                        <div class="form-style">
+                        <div className="form-style">
                             <form onSubmit={this.handleCreateUser}>
-                                <div class="form-group">
-                                    <input type="text" placeholder="Username" class="form-control" name="usernameSignup" value={usernameSignup} onChange={this.handleChange}/>
+                                <div className="form-group">
+                                    <input type="text" placeholder="Username" className="form-control" name="usernameSignup" value={usernameSignup} onChange={this.handleChange}/>
                                 </div>
-                                <div class="form-group">
-                                    <input type="text" placeholder="Address" class="form-control" name="addressSignup" value={addressSignup} onChange={this.handleChange}/>
+                                <div className="form-group">
+                                    <input type="text" placeholder="Address" className="form-control" name="addressSignup" value={addressSignup} onChange={this.handleChange}/>
                                 </div>
-                                <div class="form-group">
-                                    <input type="email" placeholder="Email" class="form-control" name="emailSignup" value={emailSignup} onChange={this.handleChange}/>
+                                <div className="form-group">
+                                    <input type="email" placeholder="Email" className="form-control" name="emailSignup" value={emailSignup} onChange={this.handleChange}/>
                                 </div>
-                                <div class="form-group">
-                                    <input type="password" placeholder="Password" class="form-control" name="passwordSignup" value={passwordSignup} onChange={this.handleChange}/>
+                                <div className="form-group">
+                                    <input type="password" placeholder="Password" className="form-control" name="passwordSignup" value={passwordSignup} onChange={this.handleChange}/>
                                 </div>
-                                <div class="pb-2">
-                                    <button type="submit" class="btn w-100 font-weight-bold mt-2 btn-lg login-btn">Signup</button>
+                                <div className="pb-2">
+                                    <button type="submit" className="btn w-100 font-weight-bold mt-2 btn-lg login-btn">Signup</button>
                                 </div>
                             </form>
                         </div>

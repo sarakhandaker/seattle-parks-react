@@ -4,6 +4,12 @@ import Logo from '../images/logo2.png'
 import {Navbar} from 'react-bootstrap'
 
 export class NavBar extends Component {
+
+    handleLogout=()=>{
+        this.props.onLogout()
+        this.props.history.push('/login')
+      }
+
     render() {
         return (
             <nav className="navbar fixed-top navbar-expand-md custom-navbar navbar-dark">
@@ -26,7 +32,7 @@ export class NavBar extends Component {
                             <Navbar.Text className="nav-link"><b ><Link to="/about">About</Link></b></Navbar.Text>
                             </li>
                             <li className="nav-item">
-                                {this.props.user? <Navbar.Text className="nav-link"><b ><Link to="/login">Logout</Link></b></Navbar.Text> : <Navbar.Text className="nav-link"><b ><Link to="/login">Login</Link></b></Navbar.Text>}
+                                {this.props.user? <Navbar.Text className="nav-link"><b onClick={this.handleLogout}><Link to="/login">Logout</Link></b></Navbar.Text> : <Navbar.Text className="nav-link"><b ><Link to="/login">Login</Link></b></Navbar.Text>}
                             </li>
                         </ul>
                     </div>  
