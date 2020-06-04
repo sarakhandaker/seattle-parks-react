@@ -1,5 +1,69 @@
 import React, { Component } from 'react'
 
+const FEATURESALL=["Golf",
+"Play Area (ADA Compliant)",
+"Basketball (Full)",
+"Bike Trail",
+"Play Area",
+"Paths",
+"Waterfront",
+"P-Patch Community Garden",
+"Soccer",
+"View",
+"Woods",
+"Historic Landmark",
+"Creek",
+"Garden",
+"Boat Launch (Hand Carry)",
+"Adult Fitness Equipment",
+"Guarded Beach",
+"Restrooms (ADA Compliant)",
+"Wading Pool or Water Feature",
+"Tennis Lights",
+"Picnic Sites",
+"Disc Golf",
+"Restrooms",
+"Weddings and Ceremonies",
+"Green Space",
+"Paths (ADA Compliant)",
+"Baseball/Softball",
+"Fishing",
+"Basketball (Half)",
+"Rental Facility",
+"Hiking Trails",
+"Pesticide Free",
+"Decorative Fountain",
+"Tennis Court (Outdoor)",
+"Horseshoe Pits",
+"Dog Off Leash Area",
+"Skatepark",
+"Football",
+"Marination Ma Kai",
+"Lawn Bowling",
+"Tennis Backboard (Outdoor)",
+"Scuba Diving",
+"Community Building",
+"Environmental Learning Center",
+"NO Beach Access",
+"Fire Pit",
+"Pool (Outdoor)",
+"Lacrosse",
+"Boat Moorage",
+"Picnic Sites (ADA Compliant)",
+"Skatespot",
+"Model Boat Pond",
+"Community Center",
+"Cricket",
+"Ultimate",
+"Track",
+"Rugby",
+"Boat Launch (Motorized)",
+"Bike Polo",
+"Pool (Indoor)",
+"T-Ball",
+"Pickleball Court",
+"Flag Football"]
+
 export class AllParkForm extends Component {
     state={
         search:"",
@@ -41,7 +105,7 @@ export class AllParkForm extends Component {
 
                     <div className="form-group">
                         <label className="col-md-4 control-label">Search By Features</label>
-                             {this.props.features.map(feat=> <label key={feat.id} className="checkbox-inline"><input onChange={(e)=>this.handleChangefeatures(e)} type="checkbox" name="checkboxes" value={feat.name} />{feat.name}</label> )}
+                             {FEATURESALL.map((feat, index)=> <label key={index} className="checkbox-inline"><input onChange={(e)=>this.handleChangefeatures(e)} type="checkbox" name="checkboxes" value={feat} />{feat}</label> )}
                     </div>
 
                     <div className="form-group">
