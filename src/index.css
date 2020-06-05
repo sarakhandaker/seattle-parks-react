@@ -235,3 +235,20 @@ li {
 .tg{
 	padding-bottom:45px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+.custom-control-input-warning:checked ~ .custom-control-label::before {
+  background-color: #ffc107 !important;
+  border-color: #ffc107 !important;
+}

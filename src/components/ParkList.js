@@ -15,7 +15,7 @@ export class ParkList extends Component {
         return this.props.parks.map(park=>
             <li key={park.id}><Link to={this.props.match.url+"/"+park.id}>
             <span className="icon"><i className="fa fa-tree"></i></span>
-        <span className="text"><strong>{this.toTitleCase(park.name)}</strong>- {park.address}</span></Link>
+        <span className="text"><strong>{this.toTitleCase(park.name)}</strong>- {park.seedAddress}</span></Link>
             <div className="clearfix"></div>
         </li>
             )

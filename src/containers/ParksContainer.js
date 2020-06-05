@@ -2,9 +2,6 @@ import React, { Component } from 'react'
 import ParkList from '../components/ParkList'
 import AllParksForm from '../components/AllParkForm'
 import ShowMap from '../components/ShowMap'
-import {Route} from 'react-router-dom'
-// import SingleParkContainer from "../containers/SingleParkContainer"
-
 
 export class ParksContainer extends Component {
     state={
@@ -28,10 +25,10 @@ export class ParksContainer extends Component {
     }
 
     render() {
-        const {display, parks}=this.state
+        const {display}=this.state
         return (
             <div className="container">
-                <div className="row" >
+                <div className="row pb-5" >
                     <div className="col-lg-6 col-md-6 col-sm-6 singlepark" style={{"minHeight": "500px"}}>
                         <AllParksForm onSearch={this.onSubmit}/>
                     </div>
