@@ -3,7 +3,7 @@ import ParkList from '../components/ParkList'
 import AllParksForm from '../components/AllParkForm'
 import ShowMap from '../components/ShowMap'
 import {Route} from 'react-router-dom'
-import SingleParkContainer from '../containers/SingleParkContainer'
+// import SingleParkContainer from "../containers/SingleParkContainer"
 
 
 export class ParksContainer extends Component {
@@ -40,7 +40,7 @@ export class ParksContainer extends Component {
                     </div>
                 </div>
                 <ParkList parks={display} match={this.props.match}/>
-                <Route path={`parks/:parkId`} render={props => <SingleParkContainer {...props} parks={this.state.parks} />}/>
+             
             </div>
         )
     }

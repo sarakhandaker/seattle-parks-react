@@ -8,7 +8,7 @@ import Footer from './components/Footer'
 import UserHomeContainer from './containers/UserHomeContainer'
 import About from './components/About'
 import ParksContainer from "./containers/ParksContainer"
-// import SinglePark from "./containers/SingleParkContainer"
+import SingleParkContainer from "./containers/SingleParkContainer"
 
 export default class App extends PureComponent {
 
@@ -34,7 +34,8 @@ export default class App extends PureComponent {
         <Route exact path="/login" render={props => <Login {...props} onLogin={this.setUser} />}/>
         <Route path= '/about' render={props => <About {...props} setUser={this.setUser} />}/>
         <Route path= '/home' render={props => <UserHomeContainer {...props} setUser={this.setUser} user={this.state.user} />}/>
-        <Route path= '/parks' render={props => <ParksContainer {...props} setUser={this.setUser} user={this.state.user} />}/>
+        <Route exact path= '/parks' render={props => <ParksContainer {...props} setUser={this.setUser} user={this.state.user} />}/>
+        <Route path={`/parks/:id`} render={props => <SingleParkContainer {...props} />}/>
         </Router>
         <Footer />
         </Fragment>

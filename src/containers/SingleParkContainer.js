@@ -3,38 +3,51 @@ import ShowMap from '../components/ShowMap'
 import Rating from '../components/Rating'
 
 export class SingleParkContainer extends Component {
+  state={
+    park:{}
+  }
+
+  componentDidMount(){
+    fetch("http://localhost:3000/api/v1/parks/"+this.props.match.params.id)
+    .then(r=>r.json())
+    .then(r=> this.setState({park: r}))
+}
     render() {
-      console.log("hi")
+      if (!this.state.park.name){return  <div className="container"><h1> NO PARK FOUND </h1></div>}
+      const {name, park_features, address}=this.state.park
         return (
             <div className="container">
-              <div class="row">
+              <div class="row pb-5">
           <div class="col-lg-6 col-md-6 col-sm-6">
              <div class="con1" style={{"height": "400px"}}>
-                <span>Park</span>
-                <h2>Park Name</h2>
-                <div class="tags">
+                <span>Park:</span>
+                <h2>{name}</h2>
+                <span>{address}</span>
+                <div class="tags pt-3">
+                <div class="tg">
+                     <div class="tgcon">
+                       <span>Neighborhood</span>
+                       <p>Lorem Ipsum has been standarddummy text</p>
+                       <p></p>
+                     </div>
+                     <div class="clear"></div>
+                  </div>
+
                   <div class="tg">
                      <div class="tgcon">
                        <span>List of Park Features</span>
-                       <p>Lorem Ipsum is simply dummy text the printing and typeseing industry Lorem Ipsum has been standarddummy text</p>
+                          {park_features.map(feat=><p>{feat.feature.name}-{feat.hours}</p>)}
                        <p></p>
                      </div>
                      <div class="clear"></div>
                   </div>
                   
-                  <div class="tg">
-                     <div class="tgcon">
-                       <span>Other Park Stuff</span>
-                       <p>Lorem Ipsum is simply dummy text the printing and typeseing industry Lorem Ipsum has been standarddummy text</p>
-                       <p></p>
-                     </div>
-                     <div class="clear"></div>
-                  </div>
+
                   
                   <div class="tg">
                      <div class="tgcon">
-                       <span>More Parks Stuff</span>
-                       <p>Lorem Ipsum is simply dummy text the printing and typeseing industry Lorem Ipsum has been standarddummy text</p>
+                       <span>Size</span>
+                       <p>Lorem Ipsum has been standarddummy text</p>
                        <p></p>
                      </div>
                      <div class="clear"></div>
@@ -44,7 +57,7 @@ export class SingleParkContainer extends Component {
              </div>
           </div>   
           <div class="col-lg-6 col-md-6 col-sm-6 singlepark">
-               <ShowMap parks={[]}/>
+               <ShowMap parks={[this.state.park]}/>
           </div>       
         </div>
 
