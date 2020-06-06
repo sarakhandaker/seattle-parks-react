@@ -1,73 +1,71 @@
 import React, { Component } from 'react'
 import AuthHOC from '../HOCs/AuthHOC'
+import Rating from '../components/Rating'
 
 export class UserHomeContainer extends Component {
-    state={
-        user:{}
+    state = {
+        user: {}
     }
-    componentDidMount(){
+    componentDidMount() {
         fetch("http://localhost:3000/api/v1/profile", {
             headers:
-        { "Content-Type": "application/json",
-        Accept: "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`
-    }})
-        .then(r=>r.json())
-        .then(r=> this.setState({user: r}))
-
+            {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+                Authorization: `Bearer ${localStorage.getItem("token")}`
+            }
+        })
+            .then(r => r.json())
+            .then(r => this.setState({ user: r.user }))
     }
+
     render() {
-        return (<>
-            
-<div class="container">
-    <div class="col-lg-7 text-center">
-        <h1 class="display-4">Welcome {this.props.user.username}</h1>
-        <p class="lead mb-0">Easily create a profile widget using bootstrap 4.</p>
-    </div>
-</div>
+        const {username, show_visits}=this.state.user
+        console.log(show_visits)
+        return (
+            <div className="container">
+                <div className="row">
+                    <div className="col-lg-7 text-left">
+                        <h1 className="display-4">Welcome {username}</h1>
+                        <p className="lead mb-0">Keep Exploring Seattle Parks!</p>
+                    </div>
+                </div>
 
+            <div className="row py-5">
+                <div className="col-xl-4 col-md-6 col-sm-10 mx-5">
+                    <div className="bg-white shadow rounded overflow-hidden">
+                        <div className="px-4 pt-0 pb-4 bg-dark">
+                            <div className="media align-items-end profile-header">
+                                <div className="profile mr-3"><a href="#" className="btn btn-dark btn-sm btn-block">Edit profile</a></div>
+                                <div className="media-body mb-5 text-white">
+                                    <h4 className="mt-0 mb-0">{this.props.user.username}</h4>
+                                    <p className="small mb-4"> <i className="fa fa-map-marker mr-2"></i>{this.props.user.address}</p>
+                                </div>
+                            </div>
+                        </div>
 
-<div class="row py-5">
-    <div class="col-xl-4 col-md-6 col-sm-10 mx-auto">
-        <div class="bg-white shadow rounded overflow-hidden">
-            <div class="px-4 pt-0 pb-4 bg-dark">
-                <div class="media align-items-end profile-header">
-                    <div class="profile mr-3"><a href="#" class="btn btn-dark btn-sm btn-block">Edit profile</a></div>
-                    <div class="media-body mb-5 text-white">
-                        <h4 class="mt-0 mb-0">Manuella Tarly</h4>
-                        <p class="small mb-4"> <i class="fa fa-map-marker mr-2"></i>San Farcisco</p>
+                        <div className="bg-light p-4 d-flex justify-content-end text-center">
+                            <ul className="list-inline mb-0">
+                                <li className="list-inline-item">
+                                    <h5 className="font-weight-bold mb-0 d-block">241</h5><small className="text-muted"> <i className="fa fa-picture-o mr-1"></i>Photos</small>
+                                </li>
+                                <li className="list-inline-item">
+                                    <h5 className="font-weight-bold mb-0 d-block">84K</h5><small className="text-muted"> <i className="fa fa-user-circle-o mr-1"></i>Followers</small>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="bg-light p-4 d-flex justify-content-end text-center">
-                <ul class="list-inline mb-0">
-                    <li class="list-inline-item">
-                        <h5 class="font-weight-bold mb-0 d-block">241</h5><small class="text-muted"> <i class="fa fa-picture-o mr-1"></i>Photos</small>
-                    </li>
-                    <li class="list-inline-item">
-                        <h5 class="font-weight-bold mb-0 d-block">84K</h5><small class="text-muted"> <i class="fa fa-user-circle-o mr-1"></i>Followers</small>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="py-4 px-4">
-                <div class="py-4">
-                    <h5 class="mb-3">Recent posts</h5>
-                    <div class="p-4 bg-light rounded shadow-sm">
-                        <p class="font-italic mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-                        <ul class="list-inline small text-muted mt-3 mb-0">
-                            <li class="list-inline-item"><i class="fa fa-comment-o mr-2"></i>12 Comments</li>
-                            <li class="list-inline-item"><i class="fa fa-heart-o mr-2"></i>200 Likes</li>
-                        </ul>
-                    </div>
+            <div className="row">
+                <div className="col">
+                    <h2>Recent Reviews</h2>
+                    <hr/>
+                        {show_visits? show_visits.map((visit, id)=><> <h4>Park: {visit.park}</h4><Rating key={id} visit={visit}/></>) :null}
                 </div>
             </div>
-        </div>
-
-    </div>
-</div>
-</>
+        </div >
         )
     }
 }

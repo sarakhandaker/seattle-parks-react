@@ -16,6 +16,18 @@ export default class App extends PureComponent {
         user:''
     }
 
+    componentDidMount(){
+      if (localStorage.getItem("token")) {
+        fetch(`http://localhost:3000/check_user`, {
+            headers: { "Content-Type": "application/json",
+              Accept: "application/json",
+              Authorization: `Bearer ${localStorage.getItem("token")}`
+            }})
+        .then(res => res.json())
+        .then((resp) => { if (!resp.error) { this.setUser(resp.user) } })
+      }
+    }
+
   onLogout=()=> {
     this.setState({user: ""})
     localStorage.removeItem('token')

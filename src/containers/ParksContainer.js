@@ -37,7 +37,6 @@ export class ParksContainer extends Component {
                     </div>
                 </div>
                 <ParkList parks={display} match={this.props.match}/>
-             
             </div>
         )
     }
