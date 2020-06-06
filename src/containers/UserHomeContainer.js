@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import AuthHOC from '../HOCs/AuthHOC'
 import Rating from '../components/Rating'
+import Weather from '../components/Weather'
 
 export class UserHomeContainer extends Component {
     state = {
@@ -16,19 +17,19 @@ export class UserHomeContainer extends Component {
             }
         })
             .then(r => r.json())
-            .then(r => this.setState({ user: r.user }))
+            .then(r => this.setState({ user: r.user, weather: r.weather }))
     }
 
     render() {
         const {username, show_visits}=this.state.user
-        console.log(show_visits)
         return (
             <div className="container">
                 <div className="row">
-                    <div className="col-lg-7 text-left">
+                    <div className="col-6 text-left">
                         <h1 className="display-4">Welcome {username}</h1>
                         <p className="lead mb-0">Keep Exploring Seattle Parks!</p>
                     </div>
+                    <Weather weather={this.state.weather}/>
                 </div>
 
             <div className="row py-5">
@@ -62,7 +63,7 @@ export class UserHomeContainer extends Component {
                 <div className="col">
                     <h2>Recent Reviews</h2>
                     <hr/>
-                        {show_visits? show_visits.map((visit, id)=><> <h4>Park: {visit.park}</h4><Rating key={id} visit={visit}/></>) :null}
+                        {show_visits? show_visits.map((visit, id)=><> <h4 key={id*10+1}>Park: {visit.park}</h4><Rating key={id} visit={visit}/></>) :null}
                 </div>
             </div>
         </div >

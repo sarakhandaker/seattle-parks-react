@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 export class VisitForm extends Component {
     state= {
-        date: "",
+        date: new Date().toISOString().substr(0,10),
         comment: "",
         rating: ""
     }
@@ -25,7 +25,7 @@ export class VisitForm extends Component {
                     <div className="form-group">
                         <div className="col-md-6">
                             <label>Select Date</label>
-                            <input onChange={this.handleChange} type="date" name="date" className="form-control" />
+                            <input onChange={this.handleChange} type="date" name="date" className="form-control" value={this.state.date}/>
                         </div>
                     </div>
                     <div className="form-group">

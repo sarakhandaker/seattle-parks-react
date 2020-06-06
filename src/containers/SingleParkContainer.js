@@ -115,7 +115,7 @@ export class SingleParkContainer extends Component {
 
           <div className="col pb-5">
             <h2>Recent Reviews</h2>
-           {show_visits.map(visit=> <Rating visit={visit}/>) }
+           {show_visits? show_visits.map(visit=> <Rating visit={visit}/>): null}
           </div>
 
           <div className="col">

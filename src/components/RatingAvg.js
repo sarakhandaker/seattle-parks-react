@@ -17,7 +17,10 @@ export class RatingAvg extends Component {
   }
 
   render() {
-    const average= Math.round(this.props.ratings.reduce((sum,num)=>sum+num,0)/this.props.ratings.length)
+    let average= Math.round(this.props.ratings.reduce((sum,num)=>sum+num,0)/this.props.ratings.length)
+    if (!this.props.ratings.length){
+      average=0
+    }
     return (
       <>
       <div className="col-sm-3">
