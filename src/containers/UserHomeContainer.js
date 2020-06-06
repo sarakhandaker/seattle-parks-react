@@ -2,10 +2,13 @@ import React, { Component } from 'react'
 import AuthHOC from '../HOCs/AuthHOC'
 import Rating from '../components/Rating'
 import Weather from '../components/Weather'
+import UserEditForm from '../components/UserEditForm'
 
 export class UserHomeContainer extends Component {
     state = {
-        user: {}
+        user: {},
+        editUser:false,
+        erros:""
     }
     componentDidMount() {
         fetch("http://localhost:3000/api/v1/profile", {
@@ -20,6 +23,39 @@ export class UserHomeContainer extends Component {
             .then(r => this.setState({ user: r.user, weather: r.weather }))
     }
 
+    handleEditUser(){
+        this.setState(prev=> ({editUser: !prev.editUser}))
+    }
+
+    onSubmit=(data)=>{
+        fetch(`http://localhost:3000/api/v1/users/${this.state.user.id}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json',
+                    Authorization: `Bearer ${localStorage.getItem("token")}`
+                },
+                body: JSON.stringify(data)
+            })
+                .then(r => r.json())
+                .then(res => {
+                    console.log(res)
+                    if (res.error) {
+                        this.setState({ error: res.error })
+                    }
+                    else {
+                      this.setState({user: res.user, editUser: false})
+                    }
+                })
+      }
+    
+      formErrors(){
+        if (this.state.error){
+          const keys=Object.keys(this.state.error)
+          return keys.map( (key,i)=> <h6 key={i} style={{"color":"orange"}}>{key}: {this.state.error[key]} </h6>)
+       }
+    }
+
     render() {
         const {username, show_visits}=this.state.user
         return (
@@ -28,36 +64,13 @@ export class UserHomeContainer extends Component {
                     <div className="col-6 text-left">
                         <h1 className="display-4">Welcome {username}</h1>
                         <p className="lead mb-0">Keep Exploring Seattle Parks!</p>
+                        <h3 className="mb-4"> <i className="fa fa-map-marker mr-2"></i>{this.props.user.address}</h3>
+                        <button onClick={()=>this.handleEditUser()} className="btn btn-dark mr-3">{this.state.editUser? "Close Edit User Form":"Edit profile"}</button>
+                        {this.state.editUser && username? <UserEditForm onSubmit= {this.onSubmit} user={this.state.user}/>: null}
+                        {this.formErrors()}
                     </div>
                     <Weather weather={this.state.weather}/>
                 </div>
-
-            <div className="row py-5">
-                <div className="col-xl-4 col-md-6 col-sm-10 mx-5">
-                    <div className="bg-white shadow rounded overflow-hidden">
-                        <div className="px-4 pt-0 pb-4 bg-dark">
-                            <div className="media align-items-end profile-header">
-                                <div className="profile mr-3"><a href="#" className="btn btn-dark btn-sm btn-block">Edit profile</a></div>
-                                <div className="media-body mb-5 text-white">
-                                    <h4 className="mt-0 mb-0">{this.props.user.username}</h4>
-                                    <p className="small mb-4"> <i className="fa fa-map-marker mr-2"></i>{this.props.user.address}</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="bg-light p-4 d-flex justify-content-end text-center">
-                            <ul className="list-inline mb-0">
-                                <li className="list-inline-item">
-                                    <h5 className="font-weight-bold mb-0 d-block">241</h5><small className="text-muted"> <i className="fa fa-picture-o mr-1"></i>Photos</small>
-                                </li>
-                                <li className="list-inline-item">
-                                    <h5 className="font-weight-bold mb-0 d-block">84K</h5><small className="text-muted"> <i className="fa fa-user-circle-o mr-1"></i>Followers</small>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
             <div className="row">
                 <div className="col">

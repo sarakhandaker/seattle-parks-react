@@ -36,7 +36,7 @@ export class Weather extends Component {
         <div class="panel-heading">Current Seattle Weather<br /><small id="currentTime" class="supersmall">{weather? weather[0]['applicable_date']: null}</small></div>
                         <div class="row">
                             <div class="col-sm-6 wi" id="currentIcon">{weather? <img src={`https://www.metaweather.com/static/img/weather/png/64/${symb}.png`} alt="weather"/>:null}</div>
-                            <div class="col-sm-6" style={{ "padding": "0px" }}>
+                            <div class="col-sm-6 p-3" style={{ "padding": "0px" }}>
                                 <h1 class="temp"><span id="currentTemperature"></span><span>{weather? Math.round(weather[0]['the_temp']): null}°</span></h1>
                                 <small id="currentSummary">{weather? weather[0]['weather_state_name']: null}</small>
                             </div>
@@ -44,7 +44,6 @@ export class Weather extends Component {
                         <div class="row">
                             <div class="col-sm-12"><span></span><br />
                                 <span>wind: {weather? Math.round(weather[0]['wind_speed']): null}</span><span id="currentWind"></span><span> mph(s)</span><br />
-                                <span id="hourlySummary"></span>
                             </div>
                         </div>
                     </div>
