@@ -33,7 +33,7 @@ export class RatingAvg extends Component {
     }
     return (
       <>
-      <div className="col-sm-3">
+      {counts? <> <div className="col-sm-3">
         <div className="rating-block">
           <h4>Average user rating</h4>
           <h2 className="bold padding-bottom-7">{average} <small>/ 5</small></h2>
@@ -65,7 +65,7 @@ export class RatingAvg extends Component {
               </div>
             </div>
           </div>
-          <div className="pull-right" style={{ "marginLeft": "10px" }}>{counts? counts["4"]: "0"}</div>
+          <div className="pull-right" style={{ "marginLeft": "10px" }}>{counts["4"]}</div>
         </div>
         <div className="pull-left">
           <div className="pull-left" style={{ "width": "35px", "lineHeight": 1 }}>
@@ -77,7 +77,7 @@ export class RatingAvg extends Component {
               </div>
             </div>
           </div>
-          <div className="pull-right" style={{ "marginLeft": "10px" }}>{counts? counts["3"]: "0"}</div>
+          <div className="pull-right" style={{ "marginLeft": "10px" }}>{counts["3"]}</div>
         </div>
         <div className="pull-left">
           <div className="pull-left" style={{ "width": "35px", "lineHeight": 1 }}>
@@ -89,7 +89,7 @@ export class RatingAvg extends Component {
               </div>
             </div>
           </div>
-          <div className="pull-right" style={{ "marginLeft": "10px" }}>{counts? counts["2"]: "0"}</div>
+          <div className="pull-right" style={{ "marginLeft": "10px" }}>{counts["2"]}</div>
         </div>
         <div className="pull-left">
           <div className="pull-left" style={{ "width": "35px", "lineHeight": 1 }}>
@@ -101,10 +101,10 @@ export class RatingAvg extends Component {
               </div>
             </div>
           </div>
-          <div className="pull-right" style={{ "marginLeft": "10px" }}>{counts? counts["1"]: "0"}</div>
+          <div className="pull-right" style={{ "marginLeft": "10px" }}>{counts["1"]}</div>
         </div>
-      </div>
-      </>
+      </div> </> : null}
+      </> 
         )
   }
 }
