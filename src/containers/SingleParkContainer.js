@@ -89,7 +89,7 @@ export class SingleParkContainer extends Component {
   }
   render() {
     if (!this.state.park.name) { return <div className="container"><h1> NO PARK FOUND </h1></div> }
-    const { name, show_features, seedAddress, show_visits } = this.state.park
+    const { name, show_features, seedAddress, show_visits,neigh } = this.state.park
     return (
       <div className="container">
         <div className="row pb-5">
@@ -102,7 +102,7 @@ export class SingleParkContainer extends Component {
                 <div className="tg">
                   <div className="tgcon">
                     <span>Neighborhood</span>
-                    <p>Lorem Ipsum has been standarddummy text</p>
+                    <p>{neigh? neigh: "Seattle"}</p>
                     <p></p>
                   </div>
                   <div className="clear"></div>
