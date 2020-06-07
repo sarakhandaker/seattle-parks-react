@@ -18,7 +18,7 @@ export default class App extends PureComponent {
 
     componentDidMount(){
       if (localStorage.getItem("token")) {
-        fetch(`http://localhost:3000/check_user`, {
+        fetch(`https://seattle-parks-api.herokuapp.com/check_user`, {
             headers: { "Content-Type": "application/json",
               Accept: "application/json",
               Authorization: `Bearer ${localStorage.getItem("token")}`
