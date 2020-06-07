@@ -9,7 +9,8 @@ export class ParksContainer extends Component {
         display: []
     }
     componentDidMount(){
-        fetch("http://localhost:3000/api/v1/parks")
+        // fetch("http://localhost:3000/api/v1/parks")
+        fetch("https://seattle-parks-api.herokuapp.com/api/v1/parks")
         .then(r=>r.json())
         .then(r=> this.setState({parks: r, display: r}))
     }
