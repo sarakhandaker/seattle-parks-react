@@ -13,7 +13,7 @@ export class SavedParksList extends Component {
     }
 
     handleDelete=(id)=>{
-        fetch(`http://localhost:3000/api/v1/saved_park/${id}`, {
+        fetch(`https://seattle-parks-api.herokuapp.com/api/v1/saved_park/${id}`, {
         method: `DELETE`,
         headers:
         {

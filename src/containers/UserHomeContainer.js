@@ -12,7 +12,7 @@ export class UserHomeContainer extends Component {
         erros:""
     }
     componentDidMount() {
-        fetch("http://localhost:3000/api/v1/profile", {
+        fetch("https://seattle-parks-api.herokuapp.com/api/v1/profile", {
             headers:
             {
                 "Content-Type": "application/json",
@@ -29,7 +29,7 @@ export class UserHomeContainer extends Component {
     }
 
     onSubmit=(data)=>{
-        fetch(`http://localhost:3000/api/v1/users/${this.state.user.id}`, {
+        fetch(`https://seattle-parks-api.herokuapp.com/api/v1/users/${this.state.user.id}`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',

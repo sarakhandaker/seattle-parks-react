@@ -14,7 +14,7 @@ export class SingleParkContainer extends Component {
   }
 
   componentDidMount() {
-    fetch("http://localhost:3000/api/v1/parks/" + this.props.match.params.id,{
+    fetch("https://seattle-parks-api.herokuapp.com/api/v1/parks/" + this.props.match.params.id,{
       method: "GET",
       headers: {
         'Content-Type': 'application/json',
@@ -31,7 +31,7 @@ export class SingleParkContainer extends Component {
   }
 
   onSubmit=(data)=>{
-    fetch('http://localhost:3000/api/v1/visits', {
+    fetch('https://seattle-parks-api.herokuapp.com/api/v1/visits', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -62,7 +62,7 @@ export class SingleParkContainer extends Component {
 
   handleSave=()=>{
     if (!this.state.saved){
-      fetch('http://localhost:3000/api/v1/saved_park', {
+      fetch('https://seattle-parks-api.herokuapp.com/api/v1/saved_park', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

@@ -32,7 +32,7 @@ export class Login extends Component {
     handleLogin = (event) => {
         event.preventDefault()
         const { emailLogin, passwordLogin } = this.state
-        fetch('http://localhost:3000/api/v1/login', {
+        fetch('https://seattle-parks-api.herokuapp.com/api/v1/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -60,7 +60,7 @@ export class Login extends Component {
     handleCreateUser = (event) => {
         event.preventDefault()
         const { usernameSignup, passwordSignup, addressSignup, emailSignup } = this.state
-        fetch('http://localhost:3000/api/v1/users', {
+        fetch('https://seattle-parks-api.herokuapp.com/api/v1/users', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
