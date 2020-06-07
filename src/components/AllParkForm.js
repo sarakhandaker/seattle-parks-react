@@ -65,7 +65,7 @@ export class AllParkForm extends Component {
 
                     <div className="form-group">
                         <label className="col-md-4 control-label">Search By Features</label>
-                        <div className="col-md-4">
+                        <div className="col">
                              {FEATURESALL.map((feat, index)=> <label key={index} className="checkbox-inline"><input onChange={(e)=>this.handleChangefeatures(e)} type="checkbox" name="checkboxes" value={feat} />{feat}</label> )}
                              </div>
                     </div>
