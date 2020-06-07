@@ -9,13 +9,21 @@ export class SingleParkContainer extends Component {
   state = {
     park: {},
     form: false,
+    saved: false,
     error: ""
   }
 
   componentDidMount() {
-    fetch("http://localhost:3000/api/v1/parks/" + this.props.match.params.id)
+    fetch("http://localhost:3000/api/v1/parks/" + this.props.match.params.id,{
+      method: "GET",
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: `Bearer ${localStorage.getItem("token")}`
+    },
+    })
       .then(r => r.json())
-      .then(r => this.setState({ park: r.park }))
+      .then(r => this.setState({ park: r.park, saved: r.saved }))
   }
 
   handleClick = () => {
@@ -52,6 +60,33 @@ export class SingleParkContainer extends Component {
    }
 }
 
+  handleSave=()=>{
+    if (!this.state.saved){
+      fetch('http://localhost:3000/api/v1/saved_park', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+            Authorization: `Bearer ${localStorage.getItem("token")}`
+        },
+        body: JSON.stringify({saved_park:{park_id: this.state.park.id, user_id:this.props.user.id}})
+    })
+        .then(r => r.json())
+        .then(res => {this.setState({saved: true})})
+    }
+    else {
+    //   fetch(`http://localhost:3000/api/v1/saved_park/${this.state.park.id}`, {
+    //     method: `DELETE`,
+    //     headers:
+    //     {
+    //         "Content-Type": "application/json",
+    //         Accept: "application/json",
+    //         Authorization: `Bearer ${localStorage.getItem("token")}`
+    //     }
+    //         })
+    }
+
+  }
   render() {
     if (!this.state.park.name) { return <div className="container"><h1> NO PARK FOUND </h1></div> }
     const { name, show_features, seedAddress, show_visits } = this.state.park
@@ -100,15 +135,15 @@ export class SingleParkContainer extends Component {
         </div>
 
         <div className="row">
-          <RatingAvg ratings={show_visits.map(v => v.rating)}/>
-          <div className="col-lg-4">
-            <div className="card-body p-4 text-right">
+          <div className="col-lg-6">
+            <div className="card-body p-4 text-left">
               <p className="custom-control custom-switch lead m-0">
-                <input className="custom-control-input custom-control-input-warning" id="customSwitch6" type="checkbox" />
+                <input onChange={this.handleSave} className="custom-control-input custom-control-input-warning" id="customSwitch6" type="checkbox" checked={this.state.saved}/>
                 <label className="custom-control-label" htmlFor="customSwitch6">Add Park to Saved List</label>
               </p>
             </div>
           </div>
+          <RatingAvg ratings={show_visits.map(v => v.rating)}/>
         </div>
         <hr />
         <div className="row">

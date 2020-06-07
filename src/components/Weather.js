@@ -30,26 +30,26 @@ export class Weather extends Component {
         
         return (
             <>
-                <div class="col-md-3"></div>
-                <div class="col-md-3">
-                    <div class="panel panel-default weather-panel">
-        <div class="panel-heading">Current Seattle Weather<br /><small id="currentTime" class="supersmall">{weather? weather[0]['applicable_date']: null}</small></div>
-                        <div class="row">
-                            <div class="col-sm-6 wi" id="currentIcon">{weather? <img src={`https://www.metaweather.com/static/img/weather/png/64/${symb}.png`} alt="weather"/>:null}</div>
-                            <div class="col-sm-6 p-3" style={{ "padding": "0px" }}>
-                                <h1 class="temp"><span id="currentTemperature"></span><span>{weather? Math.round(weather[0]['the_temp']): null}°</span></h1>
+                <div className="col-md-3"></div>
+                <div className="col-md-3">
+                    <div className="panel panel-default weather-panel">
+        <div className="panel-heading">Current Seattle Weather<br /><small id="currentTime" className="supersmall">{weather? weather[0]['applicable_date']: null}</small></div>
+                        <div className="row">
+                            <div className="col-sm-6 wi" id="currentIcon">{weather? <img src={`https://www.metaweather.com/static/img/weather/png/64/${symb}.png`} alt="weather"/>:null}</div>
+                            <div className="col-sm-6 p-3" style={{ "padding": "0px" }}>
+                                <h1 className="temp"><span id="currentTemperature"></span><span>{weather? Math.round(weather[0]['the_temp']): null}°</span></h1>
                                 <small id="currentSummary">{weather? weather[0]['weather_state_name']: null}</small>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-sm-12"><span></span><br />
+                        <div className="row">
+                            <div className="col-sm-12"><span></span><br />
                                 <span>wind: {weather? Math.round(weather[0]['wind_speed']): null}</span><span id="currentWind"></span><span> mph(s)</span><br />
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3"></div>
-                <div class="col-md-3"></div>
+                <div className="col-md-3"></div>
+                <div className="col-md-3"></div>
             </>
         )
     }

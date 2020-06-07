@@ -250,3 +250,7 @@ li {
 .weather-panel .col-sm-6 {
   text-align: center;
   }
+
+  .delete {
+    font-size: large !important;
+  }

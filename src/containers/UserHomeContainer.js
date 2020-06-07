@@ -3,6 +3,7 @@ import AuthHOC from '../HOCs/AuthHOC'
 import Rating from '../components/Rating'
 import Weather from '../components/Weather'
 import UserEditForm from '../components/UserEditForm'
+import SavedParksList from '../components/SavedParksList'
 
 export class UserHomeContainer extends Component {
     state = {
@@ -57,7 +58,7 @@ export class UserHomeContainer extends Component {
     }
 
     render() {
-        const {username, show_visits}=this.state.user
+        const {username, show_visits, saved_list}=this.state.user
         return (
             <div className="container">
                 <div className="row">
@@ -67,7 +68,7 @@ export class UserHomeContainer extends Component {
                         <h3 className="mb-4"> <i className="fa fa-map-marker mr-2"></i>{this.props.user.address}</h3>
                         <button onClick={()=>this.handleEditUser()} className="btn btn-dark mr-3">{this.state.editUser? "Close Edit User Form":"Edit profile"}</button>
                         {this.state.editUser && username? <UserEditForm onSubmit= {this.onSubmit} user={this.state.user}/>: null}
-                        {this.formErrors()}
+                        {this.state.editUser? this.formErrors():null}
                     </div>
                     <Weather weather={this.state.weather}/>
                 </div>
@@ -77,6 +78,11 @@ export class UserHomeContainer extends Component {
                     <h2>Recent Reviews</h2>
                     <hr/>
                         {show_visits? show_visits.map((visit, id)=><> <h4 key={id*10+1}>Park: {visit.park}</h4><Rating key={id} visit={visit}/></>) :null}
+                </div>
+                <div className="col">
+                    <h2>Saved Parks</h2>
+                    <hr/>
+                        <SavedParksList parks={saved_list}/>
                 </div>
             </div>
         </div >
