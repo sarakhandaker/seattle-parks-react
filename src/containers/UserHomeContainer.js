@@ -73,7 +73,7 @@ export class UserHomeContainer extends Component {
                     <Weather weather={this.state.weather}/>
                 </div>
 
-            <div className="row">
+            <div className="row pb-3">
                 <div className="col">
                     <h2>Recent Reviews</h2>
                     <hr/>
