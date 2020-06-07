@@ -254,3 +254,25 @@ li {
   .delete {
     font-size: large !important;
   }
+
+  /* ------------------------------------------------------
+----------------About US CSS--------------------------
+------------------------------------------------------ */
+
+.section .row{margin-bottom: 5%;}
+
+.section .row .col-md-6{
+    background: #ebebeb;
+    margin-right: -2%;
+    padding: 3%;
+}
+.section h3{
+    color: #2A3C2B;
+    font-size: x-large;
+}
+.section p{
+    margin-top: 10%;
+    color: #545b62;
+    font-size: medium;
+}
+.section img{width: 100%;}
