@@ -16,7 +16,7 @@ const AuthHOC = WrappedComponent => {
       if (!localStorage.getItem("token")) {
         this.props.history.push("/login")
       } else {
-        fetch(`http://localhost:3000/check_user`, {
+        fetch(`https://seattle-parks-api.herokuapp.com/check_user`, {
             headers:
         { "Content-Type": "application/json",
         Accept: "application/json",
