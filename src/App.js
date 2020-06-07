@@ -42,7 +42,7 @@ export default class App extends PureComponent {
         <Fragment>
         <Router>
         <Route path="/" render={props => <NavBar  user={this.state.user} {...props} onLogout={this.onLogout}/>}/>
-        <Route exact path="/"> {this.state.user ? <Redirect to="/login" /> : <Redirect to="/home"/>}</Route>
+        <Route exact path="/"> <Redirect to="/parks" /></Route>
         <Route exact path="/login" render={props => <Login {...props} onLogin={this.setUser} />}/>
         <Route path= '/about' render={props => <About {...props} setUser={this.setUser} />}/>
         <Route path= '/home' render={props => <UserHomeContainer {...props} setUser={this.setUser} user={this.state.user} />}/>

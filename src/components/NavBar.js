@@ -13,7 +13,7 @@ export class NavBar extends Component {
     render() {
         return (
             <nav className="navbar fixed-top navbar-expand-md custom-navbar navbar-dark">
-                <img src={Logo} id="logo_custom" alt="logo"/>
+                <Link to='/parks'><img src={Logo} id="logo_custom" alt="logo"/></Link>
                     <button className="navbar-toggler navbar-toggler-right custom-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
                         <span className="navbar-toggler-icon "></span>
                     </button>

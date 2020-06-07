@@ -136,12 +136,21 @@ export class SingleParkContainer extends Component {
 
         <div className="row">
           <div className="col-lg-6">
-            <div className="card-body p-4 text-left">
-              <p className="custom-control custom-switch lead m-0">
-                <input onChange={this.handleSave} className="custom-control-input custom-control-input-warning" id="customSwitch6" type="checkbox" checked={this.state.saved}/>
-                <label className="custom-control-label" htmlFor="customSwitch6">Add Park to Saved List</label>
-              </p>
+
+          {this.state.saved? <h3>This Park Is Saved to Your List!</h3>:null}
+          {!this.state.saved && this.props.user? 
+          <button onClick={()=>this.handleSave()} className="btn btn-link">
+            <div className="row">
+            <div className="col text-right">
+            <span className="glyphicon glyphicon-ok" aria-hidden="true"></span>
             </div>
+            <div className="col">
+            <h3>Save This Park to Your List!</h3>
+            </div>
+           </div>
+            </button>
+            : null}
+          {!this.props.user? <h3>Login to Save this Park to Your List!</h3>: null}
           </div>
           <RatingAvg ratings={show_visits.map(v => v.rating)}/>
         </div>
