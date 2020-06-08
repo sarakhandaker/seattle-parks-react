@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import {api} from '../services/api'
 
 export class SavedParksList extends Component {
 
@@ -13,15 +14,7 @@ export class SavedParksList extends Component {
     }
 
     handleDelete=(id)=>{
-        fetch(`https://seattle-parks-api.herokuapp.com/api/v1/saved_park/${id}`, {
-        method: `DELETE`,
-        headers:
-        {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`
-        }
-            })
+        api.parks.deleteSavedPark(id)
     }
 
     makeLi = () => {
@@ -38,7 +31,6 @@ export class SavedParksList extends Component {
                             <button onClick= {()=>this.handleDelete(park.id)} className="btn btn-link text-white delete"><span className="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
                         </div>
                     </div>
-
                 </li>
             )
         }

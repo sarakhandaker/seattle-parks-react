@@ -4,6 +4,7 @@ import Rating from '../components/Rating'
 import Weather from '../components/Weather'
 import UserEditForm from '../components/UserEditForm'
 import SavedParksList from '../components/SavedParksList'
+import {api} from '../services/api'
 
 export class UserHomeContainer extends Component {
     state = {
@@ -12,16 +13,8 @@ export class UserHomeContainer extends Component {
         erros: ""
     }
     componentDidMount() {
-        fetch("https://seattle-parks-api.herokuapp.com/api/v1/profile", {
-            headers:
-            {
-                "Content-Type": "application/json",
-                Accept: "application/json",
-                Authorization: `Bearer ${localStorage.getItem("token")}`
-            }
-        })
-            .then(r => r.json())
-            .then(r => this.setState({ user: r.user, weather: r.weather }))
+        api.auth.getUserProfile()
+        .then(r => this.setState({ user: r.user, weather: r.weather }))
     }
 
     handleEditUser() {
@@ -29,25 +22,15 @@ export class UserHomeContainer extends Component {
     }
 
     onSubmit = (data) => {
-        fetch(`https://seattle-parks-api.herokuapp.com/api/v1/users/${this.state.user.id}`, {
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json',
-                Accept: 'application/json',
-                Authorization: `Bearer ${localStorage.getItem("token")}`
-            },
-            body: JSON.stringify(data)
+        api.auth.editUser(data, this.state.user.id)
+        .then(res => {
+            if (res.error) {
+                this.setState({ error: res.error })
+            }
+            else {
+                this.setState({ user: res.user, editUser: false })
+            }
         })
-            .then(r => r.json())
-            .then(res => {
-                console.log(res)
-                if (res.error) {
-                    this.setState({ error: res.error })
-                }
-                else {
-                    this.setState({ user: res.user, editUser: false })
-                }
-            })
     }
 
     formErrors() {

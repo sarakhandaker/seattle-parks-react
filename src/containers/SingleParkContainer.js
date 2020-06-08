@@ -3,6 +3,7 @@ import ShowMap from '../components/ShowMap'
 import Rating from '../components/Rating'
 import VisitForm from '../components/VisitForm'
 import RatingAvg from '../components/RatingAvg'
+import {api} from '../services/api'
 
 export class SingleParkContainer extends Component {
 
@@ -14,15 +15,7 @@ export class SingleParkContainer extends Component {
   }
 
   componentDidMount() {
-    fetch("https://seattle-parks-api.herokuapp.com/api/v1/parks/" + this.props.match.params.id, {
-      method: "GET",
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-        Authorization: `Bearer ${localStorage.getItem("token")}`
-      },
-    })
-      .then(r => r.json())
+    api.parks.getSinglePark(this.props.match.params.id)
       .then(r => this.setState({ park: r.park, saved: r.saved }))
   }
 
@@ -31,26 +24,19 @@ export class SingleParkContainer extends Component {
   }
 
   onSubmit = (data) => {
-    fetch('https://seattle-parks-api.herokuapp.com/api/v1/visits', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-        Authorization: `Bearer ${localStorage.getItem("token")}`
-      },
-      body: JSON.stringify(data)
-    })
-      .then(r => r.json())
+   api.parks.postVisit(data)
       .then(res => {
         if (res.error) {
           this.setState({ error: res.error })
         }
         else {
-          this.setState({ form: false, show_visits: [...this.state.park.show_visits, { comment: res.comment, date: res.date, rating: res.rating, username: this.props.user.username }] }
+          this.setState(
+            { form: false, 
+              show_visits: [...this.state.park.show_visits, { comment: res.comment, date: res.date, rating: res.rating, username: this.props.user.username }]
+             }
           )
         }
       })
-
   }
 
   formErrors() {
@@ -61,32 +47,16 @@ export class SingleParkContainer extends Component {
   }
 
   handleSave = () => {
+    const data= { saved_park: { park_id: this.state.park.id, user_id: this.props.user.id } }
     if (!this.state.saved) {
-      fetch('https://seattle-parks-api.herokuapp.com/api/v1/saved_park', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-          Authorization: `Bearer ${localStorage.getItem("token")}`
-        },
-        body: JSON.stringify({ saved_park: { park_id: this.state.park.id, user_id: this.props.user.id } })
-      })
+        api.parks.postSavedPark(data)
         .then(r => r.json())
         .then(res => { this.setState({ saved: true }) })
     }
     else {
-      //   fetch(`http://localhost:3000/api/v1/saved_park/${this.state.park.id}`, {
-      //     method: `DELETE`,
-      //     headers:
-      //     {
-      //         "Content-Type": "application/json",
-      //         Accept: "application/json",
-      //         Authorization: `Bearer ${localStorage.getItem("token")}`
-      //     }
-      //         })
     }
-
   }
+
   render() {
     if (!this.state.park.name) { return <div className="container"><h1> NO PARK FOUND </h1></div> }
     const { name, show_features, seedAddress, show_visits, neigh } = this.state.park
@@ -101,8 +71,7 @@ export class SingleParkContainer extends Component {
               <div className="tags pt-3">
                 <div className="tg">
                   <div className="tgcon">
-                    <span>Neighborhood</span>
-                    <p>{neigh ? neigh : "Seattle"}</p>
+                    <span>Neighborhood: <p>{neigh ? neigh : "Seattle"}</p></span>
                     <p></p>
                   </div>
                   <div className="clear"></div>
@@ -111,7 +80,7 @@ export class SingleParkContainer extends Component {
                { show_features.length ? <div className="tg">
                   <div className="tgcon">
                     <span>List of Park Features</span>
-                    <table class="table">
+                    <table className="table features">
                       <thead>
                         <tr>
                           <th scope="col"></th>
@@ -121,7 +90,7 @@ export class SingleParkContainer extends Component {
                       </thead>
                       <tbody>
                         {show_features.map((feat, i) =>
-                          <tr>
+                          <tr key={i}>
                             <th scope="row">{i + 1}</th>
                             <td>{feat.feature}</td>
                             <td>{feat.hours}</td>
@@ -147,7 +116,7 @@ export class SingleParkContainer extends Component {
             </div>
           </div>
           <div className="col-lg-6 col-md-6 col-sm-6 singlepark">
-            <ShowMap parks={[this.state.park]} />
+            <ShowMap single={true} parks={[this.state.park]} />
           </div>
         </div>
 

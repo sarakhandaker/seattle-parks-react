@@ -26,15 +26,15 @@ export class MapContainer extends Component {
     };
 
   render() {
-      const {parks}=this.props
+      const {parks, single}=this.props
     return (
       <Map
         google={this.props.google}
         zoom={11}
         style={googleMapStyles}
-        initialCenter={{ lat: 47.646338, lng: -122.324242}}
+        initialCenter={!single ?{ lat: 47.646338, lng: -122.324242 }: {lat: parks[0].latitude, lng: parks[0].longitude }}
       >
-        
+
         {this.props.parks.map(park => (
             <Marker
             position={{ lat: park.latitude, lng: park.longitude }}

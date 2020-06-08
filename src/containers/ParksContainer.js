@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import ParkList from '../components/ParkList'
 import AllParksForm from '../components/AllParkForm'
 import ShowMap from '../components/ShowMap'
+import { api } from '../services/api'
 
 export class ParksContainer extends Component {
     state={
@@ -9,8 +10,7 @@ export class ParksContainer extends Component {
         display: []
     }
     componentDidMount(){
-        fetch("https://seattle-parks-api.herokuapp.com/api/v1/parks")
-        .then(r=>r.json())
+        api.parks.getParks()
         .then(r=> this.setState({parks: r, display: r}))
     }
 

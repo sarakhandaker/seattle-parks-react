@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Photo from "../images/gasworks.jpg"
+import { api } from '../services/api'
 
 export class Login extends Component {
     state = {
@@ -18,9 +19,6 @@ export class Login extends Component {
         const keys=Object.keys(this.state.error)
        return keys.map( (key,i)=> <h6 key={i}>{key}: {this.state.error[key]} </h6>)
        }
-       else {
-           return null
-       }
     }
 
     handleChange = (event) => {
@@ -30,22 +28,16 @@ export class Login extends Component {
     }
 
     handleLogin = (event) => {
+
         event.preventDefault()
+
         const { emailLogin, passwordLogin } = this.state
-        fetch('https://seattle-parks-api.herokuapp.com/api/v1/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                Accept: 'application/json'
-            },
-            body: JSON.stringify({
-                user: {
+        const data = { user: {
                     email: emailLogin,
                     password: passwordLogin,
-                }
-            })
-        })
-            .then(r => r.json())
+                }}
+
+        api.auth.login(data)
             .then(res => {
                 if (res.message) {
                     this.setState({ message: res.message })
@@ -60,22 +52,14 @@ export class Login extends Component {
     handleCreateUser = (event) => {
         event.preventDefault()
         const { usernameSignup, passwordSignup, addressSignup, emailSignup } = this.state
-        fetch('https://seattle-parks-api.herokuapp.com/api/v1/users', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                Accept: 'application/json'
-            },
-            body: JSON.stringify({
-                user: {
-                    username: usernameSignup,
-                    password: passwordSignup,
-                    address: addressSignup,
-                    email: emailSignup
-                }
-            })
-        })
-            .then(r => r.json())
+        const data = { user: {
+                        username: usernameSignup,
+                        password: passwordSignup,
+                        address: addressSignup,
+                        email: emailSignup
+            }}
+
+        api.auth.signup(data)
             .then(res => {
                 if (res.error) {
                     this.setState({ error: res.error })

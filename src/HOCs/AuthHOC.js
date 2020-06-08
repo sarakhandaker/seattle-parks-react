@@ -1,4 +1,5 @@
 import React from "react";
+import {api} from '../services/api'
 
 const AuthHOC = WrappedComponent => {
 
@@ -6,7 +7,7 @@ const AuthHOC = WrappedComponent => {
 
     state = {
       authorized: false
-    };
+    }
 
     componentDidMount() {
         this.checkLogin()
@@ -16,23 +17,15 @@ const AuthHOC = WrappedComponent => {
       if (!localStorage.getItem("token")) {
         this.props.history.push("/login")
       } else {
-        fetch(`https://seattle-parks-api.herokuapp.com/check_user`, {
-            headers:
-        { "Content-Type": "application/json",
-        Accept: "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`
-    }})
-          .then(res => res.json())
+        api.auth.check_user()
         .then((resp) => {
           if (resp.error) {
             this.props.history.push("/login")
           } else {
             this.props.setUser(resp.user)
-            this.setState({
-              authorized: true
-            });
+            this.setState({ authorized: true })
           }
-        });
+        })
       }
     };
 

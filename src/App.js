@@ -9,6 +9,7 @@ import UserHomeContainer from './containers/UserHomeContainer'
 import About from './components/About'
 import ParksContainer from "./containers/ParksContainer"
 import SingleParkContainer from "./containers/SingleParkContainer"
+import { api } from "./services/api"
 
 export default class App extends PureComponent {
 
@@ -18,12 +19,7 @@ export default class App extends PureComponent {
 
     componentDidMount(){
       if (localStorage.getItem("token")) {
-        fetch(`https://seattle-parks-api.herokuapp.com/check_user`, {
-            headers: { "Content-Type": "application/json",
-              Accept: "application/json",
-              Authorization: `Bearer ${localStorage.getItem("token")}`
-            }})
-        .then(res => res.json())
+       api.auth.check_user()
         .then((resp) => { if (!resp.error) { this.setUser(resp.user) } })
       }
     }

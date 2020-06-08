@@ -27,6 +27,12 @@ code {
   font-size: large;
   color: #2A3C2B !important;}
 
+  .navbar-text {
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+    font-size: x-large;
+}
+
 /* ------------------------------------------------------
 -----------------------LOGIN CSS-------------------------
 ------------------------------------------------------ */
@@ -180,9 +186,12 @@ li {
 ----------------Single Park CSS--------------------------
 ------------------------------------------------------ */
 
+.features {
+  font-size: 14px !important;
+}
+
 .con1 span{
 	font-weight:400;
-	color:#b6b6b6;
 	font-size:12px;
 	text-transform:uppercase;
 	padding:3px;
@@ -192,19 +201,20 @@ li {
 .con1 h2{
 	font-weight:400;
 	color:#1a1a1a;
-	font-size:37px;
-	line-height:38px;
+	font-size:30px;
+  line-height:38px;
 	margin:0;
 }
 .con1{
   padding-top:0px;
   padding-bottom:50px;
+  font-weight: bold;
 }
 
 .con1 .p{
 	font-weight:400;
 	color:#8a8a8al;
-	font-size:13px;
+	font-size:14px;
 	line-height:26px;
 }
 
