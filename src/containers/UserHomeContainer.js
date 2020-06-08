@@ -40,6 +40,13 @@ export class UserHomeContainer extends Component {
         }
     }
 
+    onRemovePark = id=>{
+        this.setState(prev=> 
+            ({  user: {...prev.user, 
+                saved_list: [...prev.user.saved_list.filter(park=> park.id !==id)]}
+            }) )
+    }
+
     render() {
         const { username, show_visits, saved_list } = this.state.user
         return (
@@ -83,7 +90,7 @@ export class UserHomeContainer extends Component {
                     <div className="col">
                         <h2>Saved Parks</h2>
                         <hr />
-                        <SavedParksList parks={saved_list} />
+                        <SavedParksList onRemove= {this.onRemovePark} parks={saved_list} />
                     </div>
                 </div>
             </div >

@@ -15,6 +15,7 @@ export class SavedParksList extends Component {
 
     handleDelete=(id)=>{
         api.parks.deleteSavedPark(id)
+        this.props.onRemove(id)
     }
 
     makeLi = () => {
