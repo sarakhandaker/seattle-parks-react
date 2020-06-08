@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import ShowMap from '../components/ShowMap'
-import Rating from '../components/Rating'
+import RatingsContainer from '../containers/RatingsContainer'
 import VisitForm from '../components/VisitForm'
 import RatingAvg from '../components/RatingAvg'
 import {api} from '../services/api'
@@ -32,7 +32,7 @@ export class SingleParkContainer extends Component {
         else {
           this.setState(
             { form: false, 
-              show_visits: [...this.state.park.show_visits, { comment: res.comment, date: res.date, rating: res.rating, username: this.props.user.username }]
+              park: {...this.state.park, show_visits: [...this.state.park.show_visits, { comment: res.comment, date: res.date, rating: res.rating, username: this.props.user.username }]}
              }
           )
         }
@@ -144,8 +144,7 @@ export class SingleParkContainer extends Component {
         <div className="row">
 
           <div className="col pb-5">
-            <h2>Recent Reviews</h2>
-            {show_visits ? show_visits.map(visit => <Rating visit={visit} />) : null}
+            {show_visits ? <RatingsContainer parkPage={true} visits={show_visits}/> : null}
           </div>
 
           <div className="col">

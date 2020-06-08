@@ -13,6 +13,7 @@ export class RatingsContainer extends Component {
                     <Rating key={id} visit={visit} />
                 </div>
             </div>
+            {this.props.parkPage? null: 
             <div className="row pb-3">
                 <div className="col p-0">
                     <button className="btn-block btn-dark">Edit</button>
@@ -21,6 +22,7 @@ export class RatingsContainer extends Component {
                     <button onClick={()=>this.onDelete(visit.id)} className="btn-block btn-dark">Delete</button>
                 </div>
             </div>
+    }
         </div>)
     }
 
