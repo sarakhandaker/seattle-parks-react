@@ -145,26 +145,20 @@ li {
 .park-list{
   padding: 10px;
   border-radius: 6px;
-  background-color: #2A3C2B;
-}
-
-.park-list ul li {
-  display: block;
-  margin-bottom: 12px;
-  color: #fff;
-  text-decoration: none;
-  -webkit-transition: 0.5s;
-  -o-transition: 0.5s;
-  transition: 0.5s;
+  background-color: #A4C3B2;
 }
 
 .park-list ul li a {
   display: block;
-  color: #fff;
+  color: #2A3C2B;
   text-decoration: none;
   -webkit-transition: 0.5s;
   -o-transition: 0.5s;
   transition: 0.5s;
+}
+
+.park-list ul li a:hover {
+  color: #DB7C00;
 }
 
 .park-list ul li a span.icon {
