@@ -55,14 +55,14 @@ export class UserHomeContainer extends Component {
     }
 
     render() {
-        const { username, show_visits, saved_list } = this.state.user
+        const { username, show_visits, saved_list, address} = this.state.user
         return (
             <div className="container">
                 <div className="row">
                     <div className="col-6 text-left">
                         <h1 className="display-4">Welcome {username}</h1>
                         <p className="lead mb-0">Keep Exploring Seattle Parks!</p>
-                        <h3 className="mb-4"> <i className="fa fa-map-marker mr-2"></i>{this.props.user.address}</h3>
+                        <h3 className="mb-4"> <i className="fa fa-map-marker mr-2"></i>{address}</h3>
                         <button onClick={() => this.handleEditUser()} className="btn btn-dark mr-3">{this.state.editUser ? "Close Edit User Form" : "Edit profile"}</button>
                         {this.state.editUser && username ? <UserEditForm onSubmit={this.onSubmit} user={this.state.user} /> : null}
                         {this.state.editUser ? this.formErrors() : null}

@@ -26,6 +26,10 @@ export class MapContainer extends Component {
     };
 
   render() {
+    var icon = {
+            url: "https://loc8tor.co.uk/wp-content/uploads/2015/08/stencil.png", // url
+            scaledSize: new this.props.google.maps.Size(90, 42), // scaled size
+        };
       const {parks, single}=this.props
     return (
       <Map
@@ -39,11 +43,19 @@ export class MapContainer extends Component {
             <Marker
             position={{ lat: park.latitude, lng: park.longitude }}
             onClick={this.onMarkerClick}
-            name= {park.name}
+             name= {park.name}
             key={park.id}
             />
         ))}
 
+{ this.props.user? <Marker
+            position={{ lat: this.props.user.latitude, lng: this.props.user.longitude }}
+            onClick={this.onMarkerClick}
+             name="YOU!"
+             icon={icon}
+            />:null
+
+}
         <InfoWindow
           marker={this.state.activeMarker}
           visible={this.state.showingInfoWindow}

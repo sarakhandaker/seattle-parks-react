@@ -116,7 +116,7 @@ export class SingleParkContainer extends Component {
             </div>
           </div>
           <div className="col-lg-6 col-md-6 col-sm-6 singlepark">
-            <ShowMap single={true} parks={[this.state.park]} />
+            <ShowMap user={this.props.user} single={true} parks={[this.state.park]} />
           </div>
         </div>
 
