@@ -88,6 +88,13 @@ const deleteSavedPark=id=>{
             })
 }
 
+const deleteVisit=id=>{
+  fetch(`${API_ROOT}/api/v1/visit/${id}`, {
+      method: `DELETE`,
+      headers: headers()
+          })
+}
+
 export const api = {
   auth: {
     login,
@@ -98,6 +105,7 @@ export const api = {
   },
   parks: {
     deleteSavedPark,
+    deleteVisit,
     getSinglePark,
     postVisit,
     postSavedPark,

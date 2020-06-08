@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import AuthHOC from '../HOCs/AuthHOC'
-import Rating from '../components/Rating'
 import Weather from '../components/Weather'
 import UserEditForm from '../components/UserEditForm'
 import SavedParksList from '../components/SavedParksList'
+import RatingsContainer from '../containers/RatingsContainer'
 import {api} from '../services/api'
 
 export class UserHomeContainer extends Component {
@@ -47,6 +47,13 @@ export class UserHomeContainer extends Component {
             }) )
     }
 
+    onRemoveVisit = id => {
+        this.setState(prev=> 
+            ({  user: {...prev.user, 
+                show_visits: [...prev.user.show_visits.filter(visit=> visit.id !==id)]}
+            }) )
+    }
+
     render() {
         const { username, show_visits, saved_list } = this.state.user
         return (
@@ -65,27 +72,7 @@ export class UserHomeContainer extends Component {
 
                 <div className="row pb-3">
                     <div className="col">
-                        <h2>Recent Reviews</h2>
-                        <hr />
-                        {show_visits ? show_visits.map((visit, id) =>
-                            <>
-                                <div className="row">
-                                    <div className="col">
-                                        <h4 key={id * 10 + 1}>Park: {visit.park}</h4>
-                                        <Rating key={id} visit={visit} />
-                                    </div>
-                                </div>
-                                <div className="row pb-3">
-                                    <div className="col p-0">
-                                        <button className="btn-block btn-dark">Edit</button>
-                                    </div>
-                                    <div className="col p-0">
-                                        <button className="btn-block btn-dark">Delete</button>
-                                    </div>
-                                </div>
-                            </>
-                        )
-                            : null}
+                    {show_visits? <RatingsContainer onRemove= {this.onRemoveVisit} visits={show_visits}/>:null}
                     </div>
                     <div className="col">
                         <h2>Saved Parks</h2>

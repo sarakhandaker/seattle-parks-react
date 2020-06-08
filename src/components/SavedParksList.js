@@ -29,7 +29,7 @@ export class SavedParksList extends Component {
                             <span className="text">{this.toTitleCase(park.park)}</span>
                         </div> </Link>
                         <div className="col text-right ">
-                            <button onClick= {()=>this.handleDelete(park.id)} className="btn btn-link text-white delete"><span className="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+                            <button onClick= {()=>this.handleDelete(park.id)} className="btn btn-link delete"><span className="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
                         </div>
                     </div>
                 </li>

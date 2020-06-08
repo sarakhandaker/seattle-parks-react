@@ -1,4 +1,3 @@
-/* #2A3C2B #2F4550 #6B9080 #A4C3B2 #F6FFF8 #DB7C00 */
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -13,15 +12,12 @@ code {
     monospace;
 }
 
-.container {
-  padding-top: 10%;
-}
+.container { padding-top: 10%; }
 
 /* ------------------------------------------------------
 -----------------------NAVBAR CSS------------------------
 ------------------------------------------------------ */
-.custom-navbar{
-  z-index:;background-color: #A4C3B2;}
+.custom-navbar{ z-index:;background-color: #A4C3B2;}
 
 .nav-link{
   font-size: large;
@@ -138,10 +134,12 @@ font-size: large;
 /* ------------------------------------------------------
 -----------------------Park List CSS---------------------
 ------------------------------------------------------ */
-
-li {
-  list-style: none;
+ul {
+  padding-left: 5px;
 }
+
+li { list-style: none; }
+
 .park-list{
   padding: 10px;
   border-radius: 6px;
@@ -151,15 +149,9 @@ li {
 .park-list ul li a {
   display: block;
   color: #2A3C2B;
-  text-decoration: none;
-  -webkit-transition: 0.5s;
-  -o-transition: 0.5s;
-  transition: 0.5s;
 }
 
-.park-list ul li a:hover {
-  color: #DB7C00;
-}
+.park-list ul li a:hover { color: #DB7C00; }
 
 .park-list ul li a span.icon {
   display: block;
@@ -171,18 +163,15 @@ li {
 .park-list ul li a span.text {
   display: block;
   font-size: 15px;
-  margin-left: 50px;
+  margin-left: 40px;
   padding-top: 12px;
 }
-
 
 /* ------------------------------------------------------
 ----------------Single Park CSS--------------------------
 ------------------------------------------------------ */
 
-.features {
-  font-size: 14px !important;
-}
+.features { font-size: 14px !important; }
 
 .con1 span{
 	font-weight:400;
@@ -228,9 +217,7 @@ li {
 	font-size:13px;
 	line-height:26px;
 }
-.tg{
-	padding-bottom:45px;
-}
+.tg{	padding-bottom:45px;}
 
 .custom-control-input-warning:checked ~ .custom-control-label::before {
   background-color: #ffc107 !important;
@@ -240,16 +227,13 @@ li {
 ----------------Weather CSS--------------------------
 ------------------------------------------------------ */
 .weather-panel .temp {
-  font-size: 5.9vw;
+  font-size: 4vw;
   margin: 0px;
   line-height: 60px;
 }
-.weather-panel .supersmall {
-  font-size: 9px;
-  margin-top: 0px;
-  }
+
 .wi {
-  font-size: 5.9vw;
+  font-size: 5.5vw;
   }
 .weather-panel .col-sm-6 {
   text-align: center;
@@ -257,6 +241,7 @@ li {
 
   .delete {
     font-size: large !important;
+    color: #2A3C2B !important;
   }
 
   /* ------------------------------------------------------

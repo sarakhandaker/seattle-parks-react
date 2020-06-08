@@ -17,7 +17,6 @@ import React, { Component } from 'react'
 // wind_direction_compass: "SSW"
 // wind_speed: 5.425869216975529
 
-
 export class Weather extends Component {
 
     render() {
@@ -38,12 +37,8 @@ export class Weather extends Component {
                             <div className="col-sm-6 wi" id="currentIcon">{weather? <img src={`https://www.metaweather.com/static/img/weather/png/64/${symb}.png`} alt="weather"/>:null}</div>
                             <div className="col-sm-6 p-3" style={{ "padding": "0px" }}>
                                 <h1 className="temp"><span id="currentTemperature"></span><span>{weather? Math.round(weather[0]['the_temp']): null}°</span></h1>
-                                <small id="currentSummary">{weather? weather[0]['weather_state_name']: null}</small>
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="col-sm-12"><span></span><br />
-                                <span>wind: {weather? Math.round(weather[0]['wind_speed']): null}</span><span id="currentWind"></span><span> mph(s)</span><br />
+                                <span>{weather? weather[0]['weather_state_name']: null}</span> <br/>
+                                <span>Wind: {weather? Math.round(weather[0]['wind_speed']): null}</span><span id="currentWind"></span><span> mph(s)</span><br />
                             </div>
                         </div>
                     </div>
