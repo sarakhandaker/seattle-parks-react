@@ -81,7 +81,7 @@ export class AllParkForm extends Component {
 
                     <div className="form-group">
                         <div className="col-md-4">
-                            <button type="Submit"> Search Parks</button>
+                            <button className="btn btn-dark" type="Submit"> Search Parks</button>
                         </div>
                     </div>
 

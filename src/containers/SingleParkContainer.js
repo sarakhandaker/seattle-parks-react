@@ -180,7 +180,7 @@ export class SingleParkContainer extends Component {
           </div>
 
           <div className="col">
-            {this.props.user ? <button onClick={this.handleClick}>{this.state.form ? "Click to Close Form" : "Click to Submit a Review"}</button> : <h3>Login to Leave a Review!</h3>}
+            {this.props.user ? <button className="btn btn-dark" onClick={this.handleClick}>{this.state.form ? "Click to Close Form" : "Click to Submit a Review"}</button> : <h3>Login to Leave a Review!</h3>}
             {this.state.form ? <VisitForm park={this.state.park} user={this.props.user} onSubmit={this.onSubmit} /> : null}
             {this.formErrors()}
           </div>

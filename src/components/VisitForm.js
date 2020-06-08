@@ -46,7 +46,7 @@ export class VisitForm extends Component {
                     </div>
                     <div className="form-group">
                         <div className="col-md-6">
-                            <button type="submit" className="form-control input-md">Submit</button>
+                            <button type="submit" className="btn btn-dark form-control input-md">Submit</button>
                         </div>
                     </div>
                 </form>
