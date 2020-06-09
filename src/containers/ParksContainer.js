@@ -59,7 +59,9 @@ export class ParksContainer extends Component {
                         <ShowMap user={this.props.user} parks={displaySection} />
                     </div>
                 </div>
+                <div className="col pb-5" >
                 <ParkList search={search} parks={displaySection} match={this.props.match} />
+                </div>
                 {!search ?
                     <div className="row pb-3">
                         <div className="col">
