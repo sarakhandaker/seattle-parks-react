@@ -32,19 +32,24 @@ export class ParksContainer extends Component {
     }
 
     handleNext = () => {
+        if (this.state.index+30 < 411){
         this.setState(prev => (
             {
                 index: prev.index + 30,
-                displaySection: prev.display.slice(prev.index, prev.index + 30)
+                displaySection: prev.display.slice(prev.index+30, prev.index + 60)
             }))
+        }
     }
 
     handlePrevious = () => {
-        this.setState(prev => (
-            {
+        if(this.state.index - 60>=0){
+        
+        this.setState(prev => {
+            return {
                 index: prev.index - 30,
-                displaySection: prev.display.slice(prev.index - 30, prev.index)
-            }))
+                displaySection: prev.display.slice(prev.index - 60, prev.index-30)
+            }})
+        }
     }
 
     render() {
