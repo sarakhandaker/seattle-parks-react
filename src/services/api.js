@@ -1,5 +1,5 @@
-const API_ROOT = `https://seattle-parks-api.herokuapp.com`;
-// const API_ROOT='http://localhost:3000'
+// const API_ROOT = `https://seattle-parks-api.herokuapp.com`;
+const API_ROOT='http://localhost:3000'
 
 const token = () => localStorage.getItem("token");
 
@@ -60,6 +60,22 @@ const postVisit=data=>{
         .then(r => r.json())
 }
 
+const editVisit=(data, id)=>{
+  return fetch(`${API_ROOT}/api/v1/visits/${id}`, {
+       method: 'PATCH',
+       headers: headers(),
+       body: JSON.stringify(data)
+   })
+       .then(r => r.json())
+}
+
+const deleteVisit=id=>{
+  fetch(`${API_ROOT}/api/v1/visit/${id}`, {
+      method: `DELETE`,
+      headers: headers()
+          })
+}
+
 const getParks=()=>{
     return fetch(`${API_ROOT}/api/v1/parks`,{headers: headers()})
         .then(r=>r.json())
@@ -88,13 +104,6 @@ const deleteSavedPark=id=>{
             })
 }
 
-const deleteVisit=id=>{
-  fetch(`${API_ROOT}/api/v1/visit/${id}`, {
-      method: `DELETE`,
-      headers: headers()
-          })
-}
-
 export const api = {
   auth: {
     login,
@@ -108,6 +117,7 @@ export const api = {
     deleteVisit,
     getSinglePark,
     postVisit,
+    editVisit,
     postSavedPark,
     getParks
   }

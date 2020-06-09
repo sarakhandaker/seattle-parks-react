@@ -10,7 +10,8 @@ export class UserHomeContainer extends Component {
     state = {
         user: {},
         editUser: false,
-        erros: ""
+        error: "",
+        visitFormError: ""
     }
     componentDidMount() {
         api.auth.getUserProfile()
@@ -33,10 +34,37 @@ export class UserHomeContainer extends Component {
         })
     }
 
+    onEditRating = (data, id)=>{
+        const {user}=this.state
+        api.parks.editVisit(data, id)
+        .then(res => {
+            if (res.error) {
+                this.setState({ visitFormError: res.error })
+            }
+            else {
+                let newVisits= user.show_visits.map(visit=> {
+                    if (res.id=== visit.id){
+                        visit=res
+                        visit.username=user.username
+                    }
+                    return visit
+                })
+                this.setState({ user: {...user, show_visits: newVisits} })
+            }
+        })
+    }
+
     formErrors() {
         if (this.state.error) {
             const keys = Object.keys(this.state.error)
             return keys.map((key, i) => <h6 key={i} style={{ "color": "orange" }}>{key}: {this.state.error[key]} </h6>)
+        }
+    }
+
+    visitFormError(){
+        if (this.state.visitFormError) {
+            const keys = Object.keys(this.state.visitFormError)
+            return keys.map((key, i) => <h6 key={i} style={{ "color": "orange" }}>{key}: {this.state.visitFormError[key]} </h6>)
         }
     }
 
@@ -72,7 +100,8 @@ export class UserHomeContainer extends Component {
 
                 <div className="row pb-3">
                     <div className="col">
-                    {show_visits? <RatingsContainer onRemove= {this.onRemoveVisit} visits={show_visits}/>:null}
+                        {this.visitFormError()}
+                    {show_visits? <RatingsContainer onEdit={this.onEditRating} onRemove= {this.onRemoveVisit} visits={show_visits}/>:null}
                     </div>
                     <div className="col">
                         <h2>Saved Parks</h2>
