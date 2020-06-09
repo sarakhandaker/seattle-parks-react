@@ -17,12 +17,16 @@ export class ParksContainer extends Component {
             .then(r => this.setState({ parks: r, display: r, displaySection: r.slice(0, 30) }))
     }
 
-    onSubmit = ({ search, features }) => {
+    onSubmit = ({ search, features, neighborhood }) => {
         let newArray = this.state.parks.filter(park => park.name.includes(search.toUpperCase()))
 
         features.forEach(feat => {
             newArray = newArray.filter(park => park.features.map(f => f.name).includes(feat))
         })
+
+        if (neighborhood){
+            newArray=newArray.filter(park=> park.neighborhood===neighborhood)
+        }
 
         this.setState({ displaySection: newArray, search: true })
     }

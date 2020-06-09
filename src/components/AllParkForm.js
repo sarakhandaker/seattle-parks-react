@@ -27,7 +27,8 @@ const NEIGHBORHOOD= ["University District", "Rainier Beach", "Central Business D
 export class AllParkForm extends Component {
     state={
         search:"",
-        features:[]
+        features:[],
+        neighborhood:""
     }
 
     handleChange=(event)=>{
@@ -73,7 +74,7 @@ export class AllParkForm extends Component {
                     <div className="form-group">
                         <label className="col-md-4 control-label">Search by Neighborhood</label>
                         <div className="col-md-4 pt-2">
-                            <select>
+                            <select name="neighborhood" onChange={(e)=>this.handleChange(e)}>
                                 {NEIGHBORHOOD.map((neigh, index)=> <option key={index} value={neigh}>{neigh}</option> )}
                             </select>
                             </div>
