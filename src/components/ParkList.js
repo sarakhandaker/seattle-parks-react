@@ -21,9 +21,10 @@ export class ParkList extends Component {
         )
     }
     render() {
+        const {search, parks}= this.props
         return (
             <div className="park-list ">
-                <h1 style={{ "color": "white" }}>{this.props.parks.length} Seattle Area Parks:</h1>
+                <h1 style={{ "color": "white" }}>{!search? "411": parks.length} Seattle Area Parks:</h1>
                 <div className="row">
                     <ul className="links">
                         {this.makeLi()}

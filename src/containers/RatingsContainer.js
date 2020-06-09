@@ -4,19 +4,23 @@ import { api } from '../services/api'
 
 export class RatingsContainer extends Component {
 
+state={
+    id: ""
+}
+
     makeRatings(){
         return this.props.visits.map((visit, id) =>
         <div key={id}>
             <div className="row">
                 <div className="col">
-                    <h4>Park: {visit.park}</h4>
-                    <Rating key={id} visit={visit} />
+                    {!this.props.parkPage? <h4>Park: {visit.park}</h4>:null}
+                    <Rating key={id} edit={this.state.id=== visit.id? true: false} visit={visit} />
                 </div>
             </div>
-            {this.props.parkPage? null: 
+            {this.props.parkPage && !this.state.edit? null: 
             <div className="row pb-3">
                 <div className="col p-0">
-                    <button className="btn-block btn-dark">Edit</button>
+                    <button onClick= {()=>this.editForm(visit.id)} className="btn-block btn-dark">Edit</button>
                 </div>
                 <div className="col p-0">
                     <button onClick={()=>this.onDelete(visit.id)} className="btn-block btn-dark">Delete</button>
@@ -31,11 +35,16 @@ export class RatingsContainer extends Component {
         this.props.onRemove(id)
     }
 
+    editForm=(id)=>{
+        this.setState({id: id})
+    }
+
     render() {
         return (
             <>
                 <h2>Recent Reviews</h2>
                         <hr />
+                {this.props.visits.length===0?<h2>No park ratings</h2>:null}
                 {this.makeRatings()}
             </>
         )

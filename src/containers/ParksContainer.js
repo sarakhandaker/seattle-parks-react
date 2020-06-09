@@ -8,8 +8,8 @@ export class ParksContainer extends Component {
     state = {
         parks: [],
         display: [],
-        displaySection:[],
-        index:0,
+        displaySection: [],
+        index: 0,
         search: false
     }
     componentDidMount() {
@@ -27,18 +27,20 @@ export class ParksContainer extends Component {
         this.setState({ displaySection: newArray, search: true })
     }
 
-    handleNext=()=>{
-        this.setState(prev=>(
-            {index: prev.index+30,
-            displaySection: prev.display.slice(prev.index, prev.index+30)
-        }))
+    handleNext = () => {
+        this.setState(prev => (
+            {
+                index: prev.index + 30,
+                displaySection: prev.display.slice(prev.index, prev.index + 30)
+            }))
     }
 
-    handlePrevious=()=>{
-        this.setState(prev=>(
-            {index: prev.index-30,
-            displaySection: prev.display.slice(prev.index-30, prev.index)
-        }))
+    handlePrevious = () => {
+        this.setState(prev => (
+            {
+                index: prev.index - 30,
+                displaySection: prev.display.slice(prev.index - 30, prev.index)
+            }))
     }
 
     render() {
@@ -53,18 +55,16 @@ export class ParksContainer extends Component {
                         <ShowMap user={this.props.user} parks={displaySection} />
                     </div>
                 </div>
-                <ParkList parks={displaySection} match={this.props.match} />
-                {!search? 
-                <nav aria-label="Page navigation example">
-                    <ul className="pagination justify-content-center">
-                        <li class="page-item">
-                            <button onClick= {this.handlePrevious} className="btn btn-dark">Previous</button>
-                        </li>
-                        <li className="page-item">
-                        <button onClick= {this.handleNext} className="btn btn-dark">Next</button>
-                        </li>
-                    </ul>
-                </nav> : null}
+                <ParkList search={search} parks={displaySection} match={this.props.match} />
+                {!search ?
+                    <div className="row pb-3">
+                        <div className="col">
+                            <button onClick={this.handlePrevious} className="btn-block btn-dark">Previous</button>
+                        </div>
+                        <div className="col">
+                            <button onClick={this.handleNext} className="btn-block btn-dark">Next</button>
+                        </div>
+                    </div> : null}
             </div>
         )
     }

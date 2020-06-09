@@ -19,14 +19,10 @@ code {
 ------------------------------------------------------ */
 .custom-navbar{ z-index:;background-color: #A4C3B2;}
 
-.nav-link{
-  font-size: large;
-  color: #2A3C2B !important;}
-
   .navbar-text {
     margin-top: 0px !important;
     margin-bottom: 0px !important;
-    font-size: x-large;
+    font-size: large;
 }
 
 /* ------------------------------------------------------

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import EditVisitForm from '../components/EditVisitForm'
 
 export class Rating extends Component {
 
@@ -16,6 +17,7 @@ export class Rating extends Component {
   render() {
     const {comment, username, date}= this.props.visit
     return (
+      <>
       <div className= "row pb-3 rating">
         <div className="col-sm-3 pt-3">
           <img src="http://dummyimage.com/60x60/666/ffffff&text=No+Image" alt="User" className="img-rounded" />
@@ -29,6 +31,8 @@ export class Rating extends Component {
           <div className="review-block-description">{comment}</div>
         </div>
         </div>
+        {this.props.edit? <EditVisitForm visit={this.props.visit}/>: null}
+        </>
     )
   }
 }

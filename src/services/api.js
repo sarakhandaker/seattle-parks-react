@@ -79,7 +79,6 @@ const postSavedPark=data=>{
         headers: headers(),
         body: JSON.stringify(data)
       })
-      .then(r => r.json())
 }
 
 const deleteSavedPark=id=>{
