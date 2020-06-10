@@ -25,9 +25,9 @@ export class NavBar extends Component {
                             <li className="nav-item">
                             <Navbar.Text className="nav-link"><b ><Link to="/parks">Find a Park</Link></b></Navbar.Text>
                             </li>
-                            <li className="nav-item">
+                            {/* <li className="nav-item">
                             <Navbar.Text className="nav-link"><b ><Link to="/analytics">Analytics</Link></b></Navbar.Text>
-                            </li>
+                            </li> */}
                             <li className="nav-item">
                             <Navbar.Text className="nav-link"><b ><Link to="/about">About</Link></b></Navbar.Text>
                             </li>
