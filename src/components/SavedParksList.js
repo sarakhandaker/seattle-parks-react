@@ -20,6 +20,7 @@ export class SavedParksList extends Component {
 
     makeLi = () => {
         if (this.props.parks) {
+            if(this.props.parks.length) {
             return this.props.parks.map(park =>
                 <li key={park.id}>
                     <div className="row">
@@ -34,6 +35,8 @@ export class SavedParksList extends Component {
                     </div>
                 </li>
             )
+            }
+            return <h2>You have no saved parks</h2>
         }
     }
 

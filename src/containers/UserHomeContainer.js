@@ -99,7 +99,6 @@ export class UserHomeContainer extends Component {
                 <div className="row">
                     <div className="col-6 text-left">
                         <h1 className="display-4">Welcome {username}</h1>
-                        <p className="lead mb-0">Keep Exploring Seattle Parks!</p>
                         {this.parksPercentage()}
                         <h3 className="mb-4"> <i className="fa fa-map-marker mr-2"></i>{address}</h3>
                         <button onClick={() => this.handleEditUser()} className="btn btn-dark mr-3">{this.state.editUser ? "Close Edit User Form" : "Edit profile"}</button>

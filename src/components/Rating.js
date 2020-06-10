@@ -26,7 +26,7 @@ export class Rating extends Component {
       <>
       <div className= "row pb-3 rating">
         <div className="col-sm-3 pt-3">
-          <img src="http://dummyimage.com/60x60/666/ffffff&text=No+Image" alt="User" className="img-rounded" />
+          <img src="http://res.freestockphotos.biz/pictures/15/15119-illustration-of-a-tree-silhouette-pv.png" alt="User" className="img-rounded" style={{"height": "60px"}}/>
           <div className="review-block-date">{newDate}<br />{ this.daysAgo()} day(s) ago</div>
         </div>
         <div className="col-sm-9 pt-3">

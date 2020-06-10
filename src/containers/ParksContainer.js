@@ -65,7 +65,7 @@ export class ParksContainer extends Component {
                     </div>
                 </div>
                 <div className="col pb-5" >
-                <ParkList search={search} parks={displaySection} match={this.props.match} />
+                <ParkList user={this.props.user} search={search} parks={displaySection} match={this.props.match} />
                 </div>
                 {!search ?
                     <div className="row pb-3">

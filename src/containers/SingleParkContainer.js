@@ -53,8 +53,6 @@ export class SingleParkContainer extends Component {
         .then(r => r.json())
         .then(res => { this.setState({ saved: true }) })
     }
-    else {
-    }
   }
 
   render() {
@@ -102,15 +100,6 @@ export class SingleParkContainer extends Component {
                   </div>
                   <div className="clear"></div>
                 </div> : null}
-
-                <div className="tg">
-                  <div className="tgcon">
-                    <span>Size</span>
-                    <p>Lorem Ipsum has been standarddummy text</p>
-                    <p></p>
-                  </div>
-                  <div className="clear"></div>
-                </div>
               </div>
 
             </div>
