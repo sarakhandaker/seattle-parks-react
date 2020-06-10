@@ -82,6 +82,16 @@ export class UserHomeContainer extends Component {
             }) )
     }
 
+    parksPercentage=()=>{
+        if (this.state.user.show_visits){        
+            let parks= this.state.user.show_visits.map(v=> v.park)
+            let numParks=[...new Set(parks)].length
+            console.log()
+            var per = (numParks/4.11).toFixed(2)
+            return <p className="lead mb-0">{`You have visited ${per}% of all Seattle Parks!`}</p>
+        }
+    }
+
     render() {
         const { username, show_visits, saved_list, address} = this.state.user
         return (
@@ -90,6 +100,7 @@ export class UserHomeContainer extends Component {
                     <div className="col-6 text-left">
                         <h1 className="display-4">Welcome {username}</h1>
                         <p className="lead mb-0">Keep Exploring Seattle Parks!</p>
+                        {this.parksPercentage()}
                         <h3 className="mb-4"> <i className="fa fa-map-marker mr-2"></i>{address}</h3>
                         <button onClick={() => this.handleEditUser()} className="btn btn-dark mr-3">{this.state.editUser ? "Close Edit User Form" : "Edit profile"}</button>
                         {this.state.editUser && username ? <UserEditForm onSubmit={this.onSubmit} user={this.state.user} /> : null}
