@@ -31,7 +31,7 @@ export class ParkList extends Component {
                 <span className="text">
                     <strong>{this.toTitleCase(park.name)}</strong>
                     - {park.seedAddress} 
-                    {user? `(${this.distance(user.latitude, user.longitude, park.latitude, park.longitude)} miles away)` :null}
+                    {user? ` (${this.distance(user.latitude, user.longitude, park.latitude, park.longitude)} miles away)` :null}
                     </span>
                     </Link>
                 <div className="clearfix"></div>
