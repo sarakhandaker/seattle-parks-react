@@ -18,7 +18,17 @@ export class ParksContainer extends Component {
     }
 
     onSubmit = ({ search, features, neighborhood }) => {
-        let newArray = this.state.parks.filter(park => park.name.includes(search.toUpperCase()))
+        let newArray
+
+        if (search){
+        newArray = this.state.parks.filter(park => park.name.includes(search.toUpperCase()))
+        }
+        else if (!search && !neighborhood && !features.length) {
+            return
+        }
+        else {
+            newArray= this.state.parks
+        }
 
         features.forEach(feat => {
             newArray = newArray.filter(park => park.features.map(f => f.name).includes(feat))
