@@ -4,13 +4,14 @@ export class VisitForm extends Component {
     state= {
         date: new Date().toISOString().substr(0,10),
         comment: "",
-        rating: ""
+        rating: "",
+        completed: true
     }
 
     handleSubmit=(event)=>{
         event.preventDefault()
         const {user, park}=this.props
-        this.props.onSubmit({visit: {...this.state, user_id:user.id, park_id: park.id }})
+        this.props.onSubmit({visit: {...this.state, user_id:user.id, park_id: park.id }}, false)
     }
 
     handleChange=(event)=>{

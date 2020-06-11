@@ -3,12 +3,13 @@ import React, { Component } from 'react'
 export class PlanVisitForm extends Component {
     state= {
         date: new Date().toISOString().substr(0,10),
+        completed: false
     }
 
     handleSubmit=(event)=>{
         event.preventDefault()
-        // const {user, park}=this.props
-        // this.props.onSubmit({visit: {...this.state, user_id:user.id, park_id: park.id }})
+        const {user, park}=this.props
+        this.props.onSubmit({visit: {...this.state, user_id: user.id, park_id: park.id }}, true)
     }
 
     handleChange=(event)=>{

@@ -29,11 +29,17 @@ export class SingleParkContainer extends Component {
     this.setState(prev => ({ planForm: !prev.planForm, error: "" }))
   }
 
-  onSubmit = (data) => {
-    if ((new Date() - new Date(data.visit.date)) < 0) {
+  onSubmit = (data, plan) => {
+    console.log(plan, data)
+    if (!plan && (new Date() - new Date(data.visit.date)) < 0) {
       this.setState({ error: { date: "cannot be in the future" } })
       return
     }
+    else if (plan && (new Date() - new Date(data.visit.date)) > 0){
+      this.setState({ error: { date: "cannot be in the past" } })
+      return
+    }
+    else {
     api.parks.postVisit(data)
       .then(res => {
         if (res.error) {
@@ -49,6 +55,7 @@ export class SingleParkContainer extends Component {
           )
         }
       })
+    }
   }
 
   formErrors() {
@@ -68,8 +75,10 @@ export class SingleParkContainer extends Component {
   }
 
   render() {
+
     if (!this.state.park.name) { return <div className="container"><h1> NO PARK FOUND </h1></div> }
     const { name, show_features, seedAddress, show_visits, neigh } = this.state.park
+    let ratings=show_visits.filter(v => v.completed)
     return (
       <div className="container">
         <div className="row pb-5">
@@ -139,13 +148,13 @@ export class SingleParkContainer extends Component {
               : null}
             {!this.props.user ? <h3>Login to Save this Park to Your List!</h3> : null}
           </div>
-          <RatingAvg ratings={show_visits.map(v => v.rating)} />
+          <RatingAvg ratings={ratings.map(v => v.rating)} />
         </div>
         <hr />
         <div className="row">
 
           <div className="col pb-5">
-            {show_visits ? <RatingsContainer parkPage={true} visits={show_visits} /> : null}
+            {show_visits ? <RatingsContainer parkPage={true} visits={ratings} /> : null}
           </div>
 
           <div className="col">
@@ -160,7 +169,7 @@ export class SingleParkContainer extends Component {
               </div>
               : <h3>Login to Leave a Review and Plan a Visit!</h3>}
             {this.state.form ? <VisitForm park={this.state.park} user={this.props.user} onSubmit={this.onSubmit} /> : null}
-            {this.state.planForm ? <PlanVisitForm park={this.state.park} user={this.props.user} /> : null}
+            {this.state.planForm ? <PlanVisitForm park={this.state.park} user={this.props.user} onSubmit={this.onSubmit}/> : null}
             {this.formErrors()}
           </div>
         </div>
