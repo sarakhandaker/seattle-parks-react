@@ -42,7 +42,7 @@ export class SavedParksList extends Component {
 
     render() {
         return (
-            <div className="park-list ">
+            <div className="park-list">
                     <ul className="links">
                         {this.makeLi()}
                     </ul>

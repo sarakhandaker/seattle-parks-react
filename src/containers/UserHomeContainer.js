@@ -4,7 +4,8 @@ import Weather from '../components/Weather'
 import UserEditForm from '../components/UserEditForm'
 import SavedParksList from '../components/SavedParksList'
 import RatingsContainer from '../containers/RatingsContainer'
-import {api} from '../services/api'
+import PlannedVisits from '../components/PlannedVisits'
+import { api } from '../services/api'
 
 export class UserHomeContainer extends Component {
     state = {
@@ -15,7 +16,7 @@ export class UserHomeContainer extends Component {
     }
     componentDidMount() {
         api.auth.getUserProfile()
-        .then(r => this.setState({ user: r.user, weather: r.weather }))
+            .then(r => this.setState({ user: r.user, weather: r.weather }))
     }
 
     handleEditUser() {
@@ -24,34 +25,34 @@ export class UserHomeContainer extends Component {
 
     onSubmit = (data) => {
         api.auth.editUser(data, this.state.user.id)
-        .then(res => {
-            if (res.error) {
-                this.setState({ error: res.error })
-            }
-            else {
-                this.setState({ user: res.user, editUser: false })
-            }
-        })
+            .then(res => {
+                if (res.error) {
+                    this.setState({ error: res.error })
+                }
+                else {
+                    this.setState({ user: res.user, editUser: false })
+                }
+            })
     }
 
-    onEditRating = (data, id)=>{
-        const {user}=this.state
+    onEditRating = (data, id) => {
+        const { user } = this.state
         api.parks.editVisit(data, id)
-        .then(res => {
-            if (res.error) {
-                this.setState({ visitFormError: res.error })
-            }
-            else {
-                let newVisits= user.show_visits.map(visit=> {
-                    if (res.id=== visit.id){
-                        visit=res
-                        visit.username=user.username
-                    }
-                    return visit
-                })
-                this.setState({ user: {...user, show_visits: newVisits} })
-            }
-        })
+            .then(res => {
+                if (res.error) {
+                    this.setState({ visitFormError: res.error })
+                }
+                else {
+                    let newVisits = user.show_visits.map(visit => {
+                        if (res.id === visit.id) {
+                            visit = res
+                            visit.username = user.username
+                        }
+                        return visit
+                    })
+                    this.setState({ user: { ...user, show_visits: newVisits } })
+                }
+            })
     }
 
     formErrors() {
@@ -61,39 +62,45 @@ export class UserHomeContainer extends Component {
         }
     }
 
-    visitFormError(){
+    visitFormError() {
         if (this.state.visitFormError) {
             const keys = Object.keys(this.state.visitFormError)
             return keys.map((key, i) => <h6 key={i} style={{ "color": "orange" }}>{key}: {this.state.visitFormError[key]} </h6>)
         }
     }
 
-    onRemovePark = id=>{
-        this.setState(prev=> 
-            ({  user: {...prev.user, 
-                saved_list: [...prev.user.saved_list.filter(park=> park.id !==id)]}
-            }) )
+    onRemovePark = id => {
+        this.setState(prev =>
+            ({
+                user: {
+                    ...prev.user,
+                    saved_list: [...prev.user.saved_list.filter(park => park.id !== id)]
+                }
+            }))
     }
 
     onRemoveVisit = id => {
-        this.setState(prev=> 
-            ({  user: {...prev.user, 
-                show_visits: [...prev.user.show_visits.filter(visit=> visit.id !==id)]}
-            }) )
+        this.setState(prev =>
+            ({
+                user: {
+                    ...prev.user,
+                    show_visits: [...prev.user.show_visits.filter(visit => visit.id !== id)]
+                }
+            }))
     }
 
-    parksPercentage=()=>{
-        if (this.state.user.show_visits){        
-            let parks= this.state.user.show_visits.map(v=> v.park)
-            let numParks=[...new Set(parks)].length
+    parksPercentage = () => {
+        if (this.state.user.show_visits) {
+            let parks = this.state.user.show_visits.map(v => v.park)
+            let numParks = [...new Set(parks)].length
             console.log()
-            var per = (numParks/4.11).toFixed(2)
+            var per = (numParks / 4.11).toFixed(2)
             return <p className="lead mb-0">{`You have visited ${per}% of all Seattle Parks!`}</p>
         }
     }
 
     render() {
-        const { username, show_visits, saved_list, address} = this.state.user
+        const { username, show_visits, saved_list, address } = this.state.user
         return (
             <div className="container">
                 <div className="row">
@@ -109,15 +116,23 @@ export class UserHomeContainer extends Component {
                 </div>
 
                 <div className="row pb-3">
+
                     <div className="col">
                         {this.visitFormError()}
-                    {show_visits? <RatingsContainer onEdit={this.onEditRating} onRemove= {this.onRemoveVisit} visits={show_visits}/>:null}
+                        {show_visits ? <RatingsContainer onEdit={this.onEditRating} onRemove={this.onRemoveVisit} visits={show_visits.filter(v => v.completed)} /> : null}
                     </div>
+
+
                     <div className="col">
-                        <h2>Saved Parks</h2>
+                            <h2>Saved Parks</h2>
+                            <hr />
+                            <SavedParksList onRemove={this.onRemovePark} parks={saved_list} />
+                        <h2 style={{"paddingTop": "20px"}}>Planned Park Visits</h2>
                         <hr />
-                        <SavedParksList onRemove= {this.onRemovePark} parks={saved_list} />
+                           {show_visits?<PlannedVisits visits={show_visits.filter(v=>!v.completed)}/>:null}
                     </div>
+
+
                 </div>
             </div >
         )
