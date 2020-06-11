@@ -24,6 +24,10 @@ export class SingleParkContainer extends Component {
   }
 
   onSubmit = (data) => {
+    if ((new Date()- new Date(data.visit.date))<0){
+      this.setState({ error: {date: "cannot be in the future"}})
+      return
+    }
    api.parks.postVisit(data)
       .then(res => {
         if (res.error) {
@@ -32,7 +36,8 @@ export class SingleParkContainer extends Component {
         else {
           this.setState(
             { form: false, 
-              park: {...this.state.park, show_visits: [...this.state.park.show_visits, { comment: res.comment, date: res.date, rating: res.rating, username: this.props.user.username }]}
+              park: {...this.state.park, show_visits: [...this.state.park.show_visits, { comment: res.comment, date: res.date, rating: res.rating, username: this.props.user.username }]},
+              error: ""
              }
           )
         }

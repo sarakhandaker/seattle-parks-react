@@ -94,7 +94,7 @@ export class Login extends Component {
                                 <div className="form-group">
                                     <input type="password" placeholder="Password" className="form-control" name="passwordLogin" value={passwordLogin} onChange={this.handleChange} />
                                 </div>
-                                <div className="pb-2">
+                                <div className="login-btn pb-2">
                                     <button type="submit" className="btn w-100 font-weight-bold mt-2 btn-lg login-btn">Login</button>
                                 </div>
                             </form>
@@ -118,7 +118,7 @@ export class Login extends Component {
                                 <div className="form-group">
                                     <input type="password" placeholder="Password" className="form-control" name="passwordSignup" value={passwordSignup} onChange={this.handleChange} />
                                 </div>
-                                <div className="pb-2">
+                                <div className="login-btn pb-2">
                                     <button type="submit" className="btn w-100 font-weight-bold mt-2 btn-lg login-btn">Signup</button>
                                 </div>
                             </form>

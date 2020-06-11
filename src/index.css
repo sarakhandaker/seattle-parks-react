@@ -65,7 +65,9 @@ code {
       margin: 0 0 0 20px;
   }
 
-  .pb-2 { background-color: #A4C3B2 !important;}
+.login-btn {
+    background-color: #A4C3B2 !important;
+  }
 
 /* ------------------------------------------------------
 -----------------------Rating CSS-------------------------
@@ -125,6 +127,10 @@ font-size: large;
   border: solid;
   border-width: 1px;
   border-color: #ccc;
+}
+
+.progress-bar{
+  color: #DB7C00 !important;
 }
 
 /* ------------------------------------------------------
