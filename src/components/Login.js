@@ -10,7 +10,7 @@ export class Login extends Component {
         passwordSignup: "",
         addressSignup: "",
         emailSignup: "",
-        message: "",
+        loginError: "",
         error:""
     }
 
@@ -22,26 +22,20 @@ export class Login extends Component {
     }
 
     handleChange = (event) => {
-        this.setState({
-            [event.target.name]: event.target.value
-        })
+        this.setState({ [event.target.name]: event.target.value })
     }
 
     handleLogin = (event) => {
-
         event.preventDefault()
 
         const { emailLogin, passwordLogin } = this.state
         const data = { user: {
-                    email: emailLogin,
-                    password: passwordLogin,
+                    email: emailLogin, password: passwordLogin,
                 }}
 
         api.auth.login(data)
             .then(res => {
-                if (res.message) {
-                    this.setState({ message: res.message })
-                }
+                if (res.message) { this.setState({ loginError: res.message }) }
                 else {
                     this.storeToken(res)
                     this.props.history.push('/home')
@@ -49,21 +43,17 @@ export class Login extends Component {
             })
     }
 
-    handleCreateUser = (event) => {
+    handleCreateUser = event => {
         event.preventDefault()
         const { usernameSignup, passwordSignup, addressSignup, emailSignup } = this.state
         const data = { user: {
-                        username: usernameSignup,
-                        password: passwordSignup,
-                        address: addressSignup,
-                        email: emailSignup
+                        username: usernameSignup, password: passwordSignup,
+                        address: addressSignup, email: emailSignup
             }}
 
         api.auth.signup(data)
             .then(res => {
-                if (res.error) {
-                    this.setState({ error: res.error })
-                }
+                if (res.error) { this.setState({ error: res.error })}
                 else {
                     this.storeToken(res)
                     this.props.history.push('/home')
@@ -77,7 +67,7 @@ export class Login extends Component {
     }
 
     render() {
-        const { emailLogin, emailSignup, usernameSignup, passwordLogin, passwordSignup, addressSignup } = this.state
+        const { emailLogin, emailSignup, usernameSignup, passwordLogin, passwordSignup, addressSignup, loginError } = this.state
         return (
             <div className="container">
                 <div className="row m-5 no-gutters shadow-lg">
@@ -98,9 +88,7 @@ export class Login extends Component {
                                     <button type="submit" className="btn w-100 font-weight-bold mt-2 btn-lg login-btn">Login</button>
                                 </div>
                             </form>
-                            <div className="text-center text-gray">
-                                <h6>{this.state.message}</h6>
-                            </div>
+                            <div className="text-center text-warning"> <h6>{loginError}</h6></div>
                         </div>
                         <div className="sideline p-2">OR</div>
                         <h3>New Users</h3>
@@ -122,9 +110,7 @@ export class Login extends Component {
                                     <button type="submit" className="btn w-100 font-weight-bold mt-2 btn-lg login-btn">Signup</button>
                                 </div>
                             </form>
-                            <div className="text-center text-gray">
-                                {this.signupErrors() }
-                            </div>
+                            <div className="text-center text-warning">{this.signupErrors() }</div>
                         </div>
                     </div>
                 </div>

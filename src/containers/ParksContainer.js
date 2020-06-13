@@ -18,47 +18,40 @@ export class ParksContainer extends Component {
     }
 
     onSubmit = ({ search, features, neighborhood }) => {
-        let newArray
+        if (!search && !neighborhood && !features.length) { return }
 
-        if (search){
-        newArray = this.state.parks.filter(park => park.name.includes(search.toUpperCase()))
+        let newArray=this.state.parks
+
+        if (neighborhood !== "All") {
+            newArray = newArray.filter(park => park.neighborhood === neighborhood)
         }
-        else if (!search && !neighborhood && !features.length) {
-            return
-        }
-        else {
-            newArray= this.state.parks
+
+        if (search) {
+            newArray = newArray.filter(park => park.name.includes(search.toUpperCase()))
         }
 
         features.forEach(feat => {
             newArray = newArray.filter(park => park.features.map(f => f.name).includes(feat))
         })
 
-        if (neighborhood){
-            newArray=newArray.filter(park=> park.neighborhood===neighborhood)
-        }
-
         this.setState({ displaySection: newArray, search: true })
     }
 
     handleNext = () => {
-        if (this.state.index+30 < 411){
-        this.setState(prev => (
-            {
-                index: prev.index + 30,
-                displaySection: prev.display.slice(prev.index+30, prev.index + 60)
-            }))
+        if (this.state.index + 30 < 411) {
+            this.setState(prev => ({
+                    index: prev.index + 30,
+                    displaySection: prev.display.slice(prev.index + 30, prev.index + 60)
+                }))
         }
     }
 
     handlePrevious = () => {
-        if(this.state.index - 60>=0){
-        
-        this.setState(prev => {
-            return {
-                index: prev.index - 30,
-                displaySection: prev.display.slice(prev.index - 60, prev.index-30)
-            }})
+        if (this.state.index - 60 >= 0) {
+            this.setState(prev => ( {
+                    index: prev.index - 30,
+                    displaySection: prev.display.slice(prev.index - 60, prev.index - 30)
+                }))
         }
     }
 
@@ -75,7 +68,7 @@ export class ParksContainer extends Component {
                     </div>
                 </div>
                 <div className="col pb-5" >
-                <ParkList user={this.props.user} search={search} parks={displaySection} match={this.props.match} />
+                    <ParkList user={this.props.user} parks={displaySection}/>
                 </div>
                 {!search ?
                     <div className="row pb-3">

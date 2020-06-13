@@ -5,6 +5,8 @@ import VisitForm from '../components/VisitForm'
 import PlanVisitForm from '../components/PlanVisitForm'
 import RatingAvg from '../components/RatingAvg'
 import { api } from '../services/api'
+import VisitsChart from '../components/VisitsChart'
+
 
 export class SingleParkContainer extends Component {
 
@@ -30,31 +32,31 @@ export class SingleParkContainer extends Component {
   }
 
   onSubmit = (data, plan) => {
-    console.log(plan, data)
     if (!plan && (new Date() - new Date(data.visit.date)) < 0) {
       this.setState({ error: { date: "cannot be in the future" } })
       return
     }
-    else if (plan && (new Date() - new Date(data.visit.date)) > 0){
+    else if (plan && (new Date() - new Date(data.visit.date)) > 0) {
       this.setState({ error: { date: "cannot be in the past" } })
       return
     }
     else {
-    api.parks.postVisit(data)
-      .then(res => {
-        if (res.error) {
-          this.setState({ error: res.error })
-        }
-        else {
-          this.setState(
-            {
-              form: false,
-              park: { ...this.state.park, show_visits: [...this.state.park.show_visits, { comment: res.comment, date: res.date, rating: res.rating, username: this.props.user.username }] },
-              error: ""
-            }
-          )
-        }
-      })
+      api.parks.postVisit(data)
+        .then(res => {
+          if (res.error) {
+            this.setState({ error: res.error })
+          }
+          else {
+            this.setState(
+              {
+                form: false,
+                planForm: false,
+                park: { ...this.state.park, show_visits: [...this.state.park.show_visits, { completed:res.completed, comment: res.comment, date: res.date, rating: res.rating, username: this.props.user.username }] },
+                error: ""
+              }
+            )
+          }
+        })
     }
   }
 
@@ -75,10 +77,9 @@ export class SingleParkContainer extends Component {
   }
 
   render() {
-
     if (!this.state.park.name) { return <div className="container"><h1> NO PARK FOUND </h1></div> }
     const { name, show_features, seedAddress, show_visits, neigh } = this.state.park
-    let ratings=show_visits.filter(v => v.completed)
+    let ratings = show_visits.filter(v => v.completed)
     return (
       <div className="container">
         <div className="row pb-5">
@@ -95,26 +96,15 @@ export class SingleParkContainer extends Component {
                   </div>
                   <div className="clear"></div>
                 </div>
-
                 {show_features.length ? <div className="tg">
                   <div className="tgcon">
                     <span>List of Park Features</span>
                     <table className="table features">
                       <thead>
-                        <tr>
-                          <th scope="col"></th>
-                          <th scope="col">Feature</th>
-                          <th scope="col">Hours</th>
-                        </tr>
+                        <tr><th scope="col">Feature</th><th scope="col">Hours</th></tr>
                       </thead>
                       <tbody>
-                        {show_features.map((feat, i) =>
-                          <tr key={i}>
-                            <th scope="row">{i + 1}</th>
-                            <td>{feat.feature}</td>
-                            <td>{feat.hours}</td>
-                          </tr>
-                        )}
+                        {show_features.map((feat, i) => <tr key={i}><td>{feat.feature}</td><td>{feat.hours}</td></tr>)}
                       </tbody>
                     </table>
                     <p></p>
@@ -122,7 +112,6 @@ export class SingleParkContainer extends Component {
                   <div className="clear"></div>
                 </div> : null}
               </div>
-
             </div>
           </div>
           <div className="col-lg-6 col-md-6 col-sm-6 singlepark">
@@ -154,7 +143,7 @@ export class SingleParkContainer extends Component {
         <div className="row">
 
           <div className="col pb-5">
-            {show_visits ? <RatingsContainer parkPage={true} visits={ratings} /> : null}
+            <RatingsContainer parkPage={true} visits={ratings}/>
           </div>
 
           <div className="col">
@@ -169,10 +158,11 @@ export class SingleParkContainer extends Component {
               </div>
               : <h3>Login to Leave a Review and Plan a Visit!</h3>}
             {this.state.form ? <VisitForm park={this.state.park} user={this.props.user} onSubmit={this.onSubmit} /> : null}
-            {this.state.planForm ? <PlanVisitForm park={this.state.park} user={this.props.user} onSubmit={this.onSubmit}/> : null}
+            {this.state.planForm ? <PlanVisitForm park={this.state.park} user={this.props.user} onSubmit={this.onSubmit} /> : null}
             {this.formErrors()}
           </div>
         </div>
+        <VisitsChart visits={show_visits.filter(v => !v.completed)}/>
       </div>
     )
   }

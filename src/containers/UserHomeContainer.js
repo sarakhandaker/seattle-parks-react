@@ -129,7 +129,7 @@ export class UserHomeContainer extends Component {
                             <SavedParksList onRemove={this.onRemovePark} parks={saved_list} />
                         <h2 style={{"paddingTop": "20px"}}>Planned Park Visits</h2>
                         <hr />
-                           {show_visits?<PlannedVisits visits={show_visits.filter(v=>!v.completed)}/>:null}
+                           {show_visits?<PlannedVisits onRemove={this.onRemoveVisit} visits={show_visits.filter(v=>!v.completed)}/>:null}
                     </div>
 
 

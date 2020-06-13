@@ -11,7 +11,7 @@ export class VisitForm extends Component {
     handleSubmit=(event)=>{
         event.preventDefault()
         const {user, park}=this.props
-        this.props.onSubmit({visit: {...this.state, user_id:user.id, park_id: park.id }}, false)
+        this.props.onSubmit({visit: {...this.state, user_id: user.id, park_id: park.id }}, false)
     }
 
     handleChange=(event)=>{

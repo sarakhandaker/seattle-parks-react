@@ -27,7 +27,6 @@ export class PlanVisitForm extends Component {
                         <input onChange={this.handleChange} type="date" name="date" className="form-control" value={this.state.date}/>
                     </div>
                 </div>
-            
                 <div className="form-group">
                     <div className="col-md-6">
                         <button type="submit" className="btn btn-dark form-control input-md">Submit</button>

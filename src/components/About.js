@@ -1,9 +1,8 @@
-import React, { Component } from 'react'
+import React from 'react'
 import FallPark from '../images/park-fall.jpg'
 import Kerry from '../images/kerry-park.jpg'
 
-export class About extends Component {
-    render() {
+export function About () {
         return (
             <div class="container section">
                 <div class="row">
@@ -35,7 +34,6 @@ export class About extends Component {
                 </div>
             </div>
         )
-    }
 }
 
 export default About
