@@ -2,13 +2,17 @@ import React, { Component } from 'react'
 import ParkList from '../components/ParkList'
 import AllParksForm from '../components/AllParkForm'
 import ShowMap from '../components/ShowMap'
-import {LoadingHOC} from '../HOCs/LoadingHOC'
+import { connect } from 'react-redux'
+import { fetchParks } from '../actions/fetchParks'
 
 export class ParksContainer extends Component {
     state = {
-        displaySection: this.props.parks.slice(0, 30),
+        displaySection: [],
         index: 0,
         search: false
+    }
+    componentDidMount() {
+        this.props.fetchParks()
     }
 
     onSubmit = ({ search, features, neighborhood }) => {
@@ -51,7 +55,6 @@ export class ParksContainer extends Component {
 
     render() {
         const { displaySection, search } = this.state
-        console.log(displaySection, search)
         return (
             <div className="container">
                 <div className="row pb-5" >
@@ -59,12 +62,12 @@ export class ParksContainer extends Component {
                         <AllParksForm onSearch={this.onSubmit} />
                     </div>
                     <div className="col-lg-6 col-md-6 col-sm-6 singlepark">
-                        <ShowMap user={this.props.user} parks={displaySection} />
+                        <ShowMap user={this.props.user} parks={displaySection.length==0 && !search? this.props.parks.slice(0, 30): displaySection} />
                     </div>
                 </div>
                 <div className="col pb-5" >
                     {this.props.requesting? <h2>Loading...</h2>: null}
-                    <ParkList user={this.props.user} parks={displaySection} />
+                    <ParkList user={this.props.user} parks={displaySection.length==0 && !search ? this.props.parks.slice(0, 30): displaySection} />
                 </div>
                 {!search ?
                     <div className="row pb-3">
@@ -80,4 +83,14 @@ export class ParksContainer extends Component {
     }
 }
 
-export default LoadingHOC(ParksContainer)
+function mapDispatchToProps(dispatch) {
+    return { fetchParks: () => dispatch(fetchParks()) }
+}
+
+function mapStateToProps(state) {
+    return { parks: state.parks,
+        requesting: state.requesting
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ParksContainer)
