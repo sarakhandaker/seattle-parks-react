@@ -27,7 +27,7 @@ export function About () {
                             About the Developer
                     </h3>
                         <p>
-                            The developer, Sara Khandaker, is a Software Developer with a background in Civil Engineering and an interest in Urban design and planning. 
+                            The developer, Sara Khandaker, is a Software Developer with a background in Civil Engineering and an interest in urban design and planning. 
                             She is passionate about geospatial data and transportation/ transit. 
                             As technology is shaping and changing the way urban systems are managed, this developer hopes to work at the intersection of software and the smart cities of tomorrow. </p>
                     </div>

@@ -7,7 +7,7 @@ import RatingAvg from '../components/RatingAvg'
 import { api } from '../services/api'
 import VisitsChart from '../components/VisitsChart'
 import { usefulFunctions } from '../services/usefulFunctions'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 
 
 export class SingleParkContainer extends Component {
@@ -82,7 +82,7 @@ export class SingleParkContainer extends Component {
     if (!this.state.park.name) { return <div className="container"><h1> NO PARK FOUND </h1></div> }
     const { name, show_features, seedAddress, show_visits, neigh, latitude, longitude } = this.state.park
     let ratings = show_visits.filter(v => v.completed)
-    const {user}=this.props.user
+    const { user } = this.props
     return (
       <div className="container">
         <div className="row pb-5">
@@ -90,8 +90,15 @@ export class SingleParkContainer extends Component {
             <div className="con1" style={{ "height": "400px" }}>
               <span>Park:</span>
               <h2>{name}</h2>
-              <span>{seedAddress}</span>
-              <p>{user ? `${usefulFunctions.distance(user.latitude, user.longitude, latitude, longitude)} miles away` : null} </p>
+              <span>{seedAddress}  {user ? ` (${usefulFunctions.distance(user.latitude, user.longitude, latitude, longitude)} miles away)` : null}</span>
+              {this.state.saved ? <h3>This Park Is Saved to Your List!</h3> : null}
+              {!this.state.saved && user ?
+                <button onClick={() => this.handleSave()} className="btn btn-secondary" >
+                  <div className="col text-right">
+                    <h3>Save This Park</h3>
+                  </div>
+                </button>
+                : null}
               <div className="tags pt-3">
                 <div className="tg">
                   <div className="tgcon">
@@ -123,33 +130,15 @@ export class SingleParkContainer extends Component {
           </div>
         </div>
 
-        <div className="row">
-          <div className="col-lg-6">
-
-            {this.state.saved ? <h3>This Park Is Saved to Your List!</h3> : null}
-            {!this.state.saved && user ?
-              <button onClick={() => this.handleSave()} className="btn btn-link">
-                <div className="row">
-                  <div className="col text-right">
-                    <span className="glyphicon glyphicon-ok" aria-hidden="true"></span>
-                  </div>
-                  <div className="col">
-                    <h3>Save This Park to Your List!</h3>
-                  </div>
-                </div>
-              </button>
-              : null}
-            {!user ? <h3>Login to Save this Park to Your List!</h3> : null}
-          </div>
+        <div className="row " >
+          <div className="col-lg-6" > {!user ? <h3>Login to Save this Park to Your List!</h3> : null}</div>
           <RatingAvg ratings={ratings.map(v => v.rating)} />
         </div>
         <hr />
         <div className="row">
-
           <div className="col pb-5">
             <RatingsContainer parkPage={true} visits={ratings} />
           </div>
-
           <div className="col">
             {this.props.user ?
               <div className="row p-2">
@@ -172,6 +161,6 @@ export class SingleParkContainer extends Component {
   }
 }
 
-const mapStateToProps=state=>( {user: state.user})
+const mapStateToProps = state => ({ user: state.user.user })
 
 export default connect(mapStateToProps)(SingleParkContainer)
