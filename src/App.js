@@ -46,7 +46,7 @@ class App extends PureComponent {
           <Route exact path="/login" render={props => <Login {...props} onLogin={this.setUser} />} />
           <Route path='/about' component={About} />
           <Route path='/home' render={props => <UserHomeContainer {...props} setUser={this.setUser} user={this.state.user} />} />
-          <Route exact path='/parks' render={props => <ParksContainer {...props} user={this.state.user}/>} />
+          <Route exact path='/parks' render={props => <ParksContainer {...props} parks={this.props.parks} user={this.state.user}/>} />
           <Route path={`/parks/:id`} render={props => <SingleParkContainer {...props} user={this.state.user} />} />
         </Router>
         <Footer />
@@ -57,7 +57,9 @@ class App extends PureComponent {
 
 const mapStateToProps=state=>{
 return {
-  user: state.user
+  user: state.user,
+  parks: state.parks
+
 }
 }
 

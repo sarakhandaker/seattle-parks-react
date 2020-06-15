@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import ParkList from '../components/ParkList'
 import AllParksForm from '../components/AllParkForm'
 import ShowMap from '../components/ShowMap'
-import { connect } from 'react-redux'
-// import { fetchParks } from '../actions/fetchParks'
+import {LoadingHOC} from '../HOCs/LoadingHOC'
 
 export class ParksContainer extends Component {
     state = {
@@ -11,9 +10,6 @@ export class ParksContainer extends Component {
         index: 0,
         search: false
     }
-    // componentDidMount() {
-    //     this.props.fetchParks()
-    // }
 
     onSubmit = ({ search, features, neighborhood }) => {
         if (!search && !neighborhood && !features.length) { return }
@@ -84,14 +80,4 @@ export class ParksContainer extends Component {
     }
 }
 
-function mapDispatchToProps(dispatch) {
-    // return { fetchParks: () => dispatch(fetchParks()) }
-}
-
-function mapStateToProps(state) {
-    return { parks: state.parks,
-        requesting: state.requesting
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ParksContainer)
+export default LoadingHOC(ParksContainer)
