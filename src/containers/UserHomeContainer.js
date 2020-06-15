@@ -91,7 +91,6 @@ export class UserHomeContainer extends Component {
         if (this.state.user.show_visits) {
             let parks = this.state.user.show_visits.map(v => v.park)
             let numParks = [...new Set(parks)].length
-            console.log()
             var per = (numParks / 4.11).toFixed(2)
             return <p className="lead mb-0">{`You have visited ${per}% of all Seattle Parks!`}</p>
         }

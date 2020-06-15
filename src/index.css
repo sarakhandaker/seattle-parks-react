@@ -5,6 +5,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  min-height: 100vh;
 }
 
 code {
@@ -12,7 +14,8 @@ code {
     monospace;
 }
 
-.container { padding-top: 10%; }
+.container { padding-top: 10%; 
+  padding-bottom: 3rem}
 
 /* ------------------------------------------------------
 -----------------------NAVBAR CSS------------------------
@@ -267,3 +270,14 @@ li { list-style: none; }
     font-size: medium;
 }
 .section img{width: 100%;}
+
+  /* ------------------------------------------------------
+----------------------Footer CSS--------------------------
+------------------------------------------------------ */
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 3rem; 
+}

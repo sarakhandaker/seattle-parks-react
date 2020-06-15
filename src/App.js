@@ -41,11 +41,6 @@ class App extends PureComponent {
 
 const mapStateToProps=state=>( {user: state.user})
 
-const mapDispatchTpProps=dispatch =>{
-  return {
-    addUser: user => dispatch({type: "ADD_USER", user}),
-    removeUser: () => dispatch({type: "REMOVE_USER"})
-  }
-}
+const mapDispatchTpProps=dispatch =>({ addUser: user => dispatch({type: "ADD_USER", user})})
 
 export default connect(mapStateToProps, mapDispatchTpProps)(App)

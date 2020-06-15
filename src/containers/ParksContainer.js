@@ -70,7 +70,7 @@ export class ParksContainer extends Component {
                     <ParkList user={this.props.user} parks={displaySection.length===0 && !search ? this.props.parks.slice(0, 30): displaySection} />
                 </div>
                 {!search ?
-                    <div className="row pb-3">
+                    <div className="row">
                         <div className="col">
                             <button onClick={this.handlePrevious} className="btn-block btn-dark">Previous</button>
                         </div>
