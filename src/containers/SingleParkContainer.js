@@ -6,6 +6,7 @@ import PlanVisitForm from '../components/PlanVisitForm'
 import RatingAvg from '../components/RatingAvg'
 import { api } from '../services/api'
 import VisitsChart from '../components/VisitsChart'
+import { usefulFunctions } from '../services/usefulFunctions'
 
 
 export class SingleParkContainer extends Component {
@@ -51,7 +52,7 @@ export class SingleParkContainer extends Component {
               {
                 form: false,
                 planForm: false,
-                park: { ...this.state.park, show_visits: [...this.state.park.show_visits, { completed:res.completed, comment: res.comment, date: res.date, rating: res.rating, username: this.props.user.username }] },
+                park: { ...this.state.park, show_visits: [...this.state.park.show_visits, { completed: res.completed, comment: res.comment, date: res.date, rating: res.rating, username: this.props.user.username }] },
                 error: ""
               }
             )
@@ -80,6 +81,7 @@ export class SingleParkContainer extends Component {
     if (!this.state.park.name) { return <div className="container"><h1> NO PARK FOUND </h1></div> }
     const { name, show_features, seedAddress, show_visits, neigh } = this.state.park
     let ratings = show_visits.filter(v => v.completed)
+    const {user}=this.props
     return (
       <div className="container">
         <div className="row pb-5">
@@ -88,6 +90,7 @@ export class SingleParkContainer extends Component {
               <span>Park:</span>
               <h2>{name}</h2>
               <span>{seedAddress}</span>
+              <p>{user ? `${usefulFunctions.distance(user.latitude, user.longitude, this.state.park.latitude, this.state.park.longitude)} miles away` : null} </p>
               <div className="tags pt-3">
                 <div className="tg">
                   <div className="tgcon">
@@ -143,7 +146,7 @@ export class SingleParkContainer extends Component {
         <div className="row">
 
           <div className="col pb-5">
-            <RatingsContainer parkPage={true} visits={ratings}/>
+            <RatingsContainer parkPage={true} visits={ratings} />
           </div>
 
           <div className="col">
@@ -162,7 +165,7 @@ export class SingleParkContainer extends Component {
             {this.formErrors()}
           </div>
         </div>
-        <VisitsChart visits={show_visits.filter(v => !v.completed)}/>
+        <VisitsChart visits={show_visits.filter(v => !v.completed)} />
       </div>
     )
   }

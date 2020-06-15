@@ -2,25 +2,23 @@ import React, { Component } from 'react'
 import ParkList from '../components/ParkList'
 import AllParksForm from '../components/AllParkForm'
 import ShowMap from '../components/ShowMap'
-import { api } from '../services/api'
+import { connect } from 'react-redux'
+// import { fetchParks } from '../actions/fetchParks'
 
 export class ParksContainer extends Component {
     state = {
-        parks: [],
-        display: [],
-        displaySection: [],
+        displaySection: this.props.parks.slice(0, 30),
         index: 0,
         search: false
     }
-    componentDidMount() {
-        api.parks.getParks()
-            .then(r => this.setState({ parks: r, display: r, displaySection: r.slice(0, 30) }))
-    }
+    // componentDidMount() {
+    //     this.props.fetchParks()
+    // }
 
     onSubmit = ({ search, features, neighborhood }) => {
         if (!search && !neighborhood && !features.length) { return }
 
-        let newArray=this.state.parks
+        let newArray = this.props.parks
 
         if (neighborhood !== "All") {
             newArray = newArray.filter(park => park.neighborhood === neighborhood)
@@ -40,23 +38,24 @@ export class ParksContainer extends Component {
     handleNext = () => {
         if (this.state.index + 30 < 411) {
             this.setState(prev => ({
-                    index: prev.index + 30,
-                    displaySection: prev.display.slice(prev.index + 30, prev.index + 60)
-                }))
+                index: prev.index + 30,
+                displaySection: this.props.parks.slice(prev.index + 30, prev.index + 60)
+            }))
         }
     }
 
     handlePrevious = () => {
         if (this.state.index - 60 >= 0) {
-            this.setState(prev => ( {
-                    index: prev.index - 30,
-                    displaySection: prev.display.slice(prev.index - 60, prev.index - 30)
-                }))
+            this.setState(prev => ({
+                index: prev.index - 30,
+                displaySection: this.props.parks.slice(prev.index - 60, prev.index - 30)
+            }))
         }
     }
 
     render() {
         const { displaySection, search } = this.state
+        console.log(displaySection, search)
         return (
             <div className="container">
                 <div className="row pb-5" >
@@ -68,7 +67,8 @@ export class ParksContainer extends Component {
                     </div>
                 </div>
                 <div className="col pb-5" >
-                    <ParkList user={this.props.user} parks={displaySection}/>
+                    {this.props.requesting? <h2>Loading...</h2>: null}
+                    <ParkList user={this.props.user} parks={displaySection} />
                 </div>
                 {!search ?
                     <div className="row pb-3">
@@ -84,4 +84,14 @@ export class ParksContainer extends Component {
     }
 }
 
-export default ParksContainer
+function mapDispatchToProps(dispatch) {
+    // return { fetchParks: () => dispatch(fetchParks()) }
+}
+
+function mapStateToProps(state) {
+    return { parks: state.parks,
+        requesting: state.requesting
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ParksContainer)

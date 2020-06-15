@@ -10,8 +10,10 @@ import About from './components/About'
 import ParksContainer from "./containers/ParksContainer"
 import SingleParkContainer from "./containers/SingleParkContainer"
 import { api } from "./services/api"
+import {connect} from 'react-redux'
+import { fetchParks } from './actions/fetchParks'
 
-export default class App extends PureComponent {
+class App extends PureComponent {
 
   state = {
     user: ''
@@ -22,6 +24,7 @@ export default class App extends PureComponent {
       api.auth.check_user()
         .then((resp) => { if (!resp.error) { this.setUser(resp.user) } })
     }
+    this.props.fetchParks()
   }
 
   onLogout = () => {
@@ -31,6 +34,7 @@ export default class App extends PureComponent {
 
   setUser = (user) => {
     this.setState({ user: user })
+
   }
 
   render() {
@@ -50,3 +54,19 @@ export default class App extends PureComponent {
     )
   }
 }
+
+const mapStateToProps=state=>{
+return {
+  user: state.user
+}
+}
+
+const mapDispatchTpProps=dispatch =>{
+  return {
+    addUser: user => dispatch({type: "ADD_USER", user}),
+    removeUser: () => dispatch({type: "REMOVE_USER"}),
+    fetchParks: () => dispatch(fetchParks())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchTpProps)(App)
