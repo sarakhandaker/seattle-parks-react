@@ -11,42 +11,27 @@ import ParksContainer from "./containers/ParksContainer"
 import SingleParkContainer from "./containers/SingleParkContainer"
 import { api } from "./services/api"
 import {connect} from 'react-redux'
-import { fetchParks } from './actions/fetchParks'
 
 class App extends PureComponent {
-
-  state = {
-    user: ''
-  }
 
   componentDidMount() {
     if (localStorage.getItem("token")) {
       api.auth.check_user()
-        .then((resp) => { if (!resp.error) { this.setUser(resp.user) } })
+        .then((resp) => { if (!resp.error) {  this.props.addUser(resp) } })
     }
-  }
-
-  onLogout = () => {
-    this.setState({ user: "" })
-    localStorage.removeItem('token')
-  }
-
-  setUser = (user) => {
-    this.setState({ user: user })
-
   }
 
   render() {
     return (
       <Fragment>
         <Router>
-          <Route path="/" render={props => <NavBar user={this.state.user} {...props} onLogout={this.onLogout} />} />
-          <Route exact path="/"> <Redirect to="/parks" /></Route>
-          <Route exact path="/login" render={props => <Login {...props} onLogin={this.setUser} />} />
+          <Route path="/" render={props => <NavBar {...props}/>} />
+          <Route exact path="/"> <Redirect to="/parks"/></Route>
+          <Route exact path="/login" render={props => <Login {...props}/>} />
           <Route path='/about' component={About} />
-          <Route path='/home' render={props => <UserHomeContainer {...props} setUser={this.setUser} user={this.state.user} />} />
-          <Route exact path='/parks' render={props => <ParksContainer {...props} user={this.state.user}/>} />
-          <Route path={`/parks/:id`} render={props => <SingleParkContainer {...props} user={this.state.user} />} />
+          <Route path='/home' render={props => <UserHomeContainer {...props} setUser={this.props.addUser}/>}/>
+          <Route exact path='/parks' render={props => <ParksContainer {...props}/>}/>
+          <Route path={`/parks/:id`} render={props => <SingleParkContainer {...props}/>} />
         </Router>
         <Footer />
       </Fragment>
@@ -54,18 +39,12 @@ class App extends PureComponent {
   }
 }
 
-const mapStateToProps=state=>{
-return {
-  user: state.user
-
-}
-}
+const mapStateToProps=state=>( {user: state.user})
 
 const mapDispatchTpProps=dispatch =>{
   return {
     addUser: user => dispatch({type: "ADD_USER", user}),
-    removeUser: () => dispatch({type: "REMOVE_USER"}),
-    fetchParks: () => dispatch(fetchParks())
+    removeUser: () => dispatch({type: "REMOVE_USER"})
   }
 }
 

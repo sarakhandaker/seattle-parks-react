@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Photo from "../images/gasworks.jpg"
 import { api } from '../services/api'
+import {connect} from 'react-redux'
 
 export class Login extends Component {
     state = {
@@ -62,7 +63,7 @@ export class Login extends Component {
     }
 
     storeToken(json) {
-        this.props.onLogin(json.user)
+        this.props.addUser(json.user)
         localStorage.setItem('token', json.jwt)
     }
 
@@ -119,4 +120,8 @@ export class Login extends Component {
     }
 }
 
-export default Login
+const mapDispatchToProps=dispatch =>( {
+    addUser: user => dispatch({type: "ADD_USER", user}),
+  })
+
+export default connect(null, mapDispatchToProps)(Login)

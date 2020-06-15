@@ -7,6 +7,7 @@ import RatingAvg from '../components/RatingAvg'
 import { api } from '../services/api'
 import VisitsChart from '../components/VisitsChart'
 import { usefulFunctions } from '../services/usefulFunctions'
+import {connect} from 'react-redux'
 
 
 export class SingleParkContainer extends Component {
@@ -79,9 +80,9 @@ export class SingleParkContainer extends Component {
 
   render() {
     if (!this.state.park.name) { return <div className="container"><h1> NO PARK FOUND </h1></div> }
-    const { name, show_features, seedAddress, show_visits, neigh } = this.state.park
+    const { name, show_features, seedAddress, show_visits, neigh, latitude, longitude } = this.state.park
     let ratings = show_visits.filter(v => v.completed)
-    const {user}=this.props
+    const {user}=this.props.user
     return (
       <div className="container">
         <div className="row pb-5">
@@ -90,7 +91,7 @@ export class SingleParkContainer extends Component {
               <span>Park:</span>
               <h2>{name}</h2>
               <span>{seedAddress}</span>
-              <p>{user ? `${usefulFunctions.distance(user.latitude, user.longitude, this.state.park.latitude, this.state.park.longitude)} miles away` : null} </p>
+              <p>{user ? `${usefulFunctions.distance(user.latitude, user.longitude, latitude, longitude)} miles away` : null} </p>
               <div className="tags pt-3">
                 <div className="tg">
                   <div className="tgcon">
@@ -118,7 +119,7 @@ export class SingleParkContainer extends Component {
             </div>
           </div>
           <div className="col-lg-6 col-md-6 col-sm-6 singlepark">
-            <ShowMap user={this.props.user} single={true} parks={[this.state.park]} />
+            <ShowMap user={user} single={true} parks={[this.state.park]} />
           </div>
         </div>
 
@@ -126,7 +127,7 @@ export class SingleParkContainer extends Component {
           <div className="col-lg-6">
 
             {this.state.saved ? <h3>This Park Is Saved to Your List!</h3> : null}
-            {!this.state.saved && this.props.user ?
+            {!this.state.saved && user ?
               <button onClick={() => this.handleSave()} className="btn btn-link">
                 <div className="row">
                   <div className="col text-right">
@@ -138,7 +139,7 @@ export class SingleParkContainer extends Component {
                 </div>
               </button>
               : null}
-            {!this.props.user ? <h3>Login to Save this Park to Your List!</h3> : null}
+            {!user ? <h3>Login to Save this Park to Your List!</h3> : null}
           </div>
           <RatingAvg ratings={ratings.map(v => v.rating)} />
         </div>
@@ -160,8 +161,8 @@ export class SingleParkContainer extends Component {
                 </div>
               </div>
               : <h3>Login to Leave a Review and Plan a Visit!</h3>}
-            {this.state.form ? <VisitForm park={this.state.park} user={this.props.user} onSubmit={this.onSubmit} /> : null}
-            {this.state.planForm ? <PlanVisitForm park={this.state.park} user={this.props.user} onSubmit={this.onSubmit} /> : null}
+            {this.state.form ? <VisitForm park={this.state.park} user={user} onSubmit={this.onSubmit} /> : null}
+            {this.state.planForm ? <PlanVisitForm park={this.state.park} user={user} onSubmit={this.onSubmit} /> : null}
             {this.formErrors()}
           </div>
         </div>
@@ -171,4 +172,6 @@ export class SingleParkContainer extends Component {
   }
 }
 
-export default SingleParkContainer
+const mapStateToProps=state=>( {user: state.user})
+
+export default connect(mapStateToProps)(SingleParkContainer)

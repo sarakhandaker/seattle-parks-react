@@ -16,7 +16,7 @@ export function PlannedVisits({ visits, onRemove }) {
                 newDate = new Date(newDate.getTime() + newDate.getTimezoneOffset() * 60000).toLocaleDateString("en-US")
                 return <div className="row" key={index}>
                     <div className="col-md-auto">
-                        <h3>{usefulFunctions.title(visit.park)}- {newDate}</h3>
+                        <h4>{usefulFunctions.title(visit.park)}- {newDate}</h4>
                     </div>
                     <div className="col text-right ">
                         <button onClick={()=>handleDelete(visit.id)} className="btn-link delete">X</button>

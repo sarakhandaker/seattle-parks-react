@@ -2,11 +2,13 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import Logo from '../images/logo2.png'
 import { Navbar } from 'react-bootstrap'
+import {connect} from 'react-redux'
 
 export function NavBar(props) {
 
     const handleLogout = () => {
-        props.onLogout()
+        localStorage.removeItem('token')
+        props.removeUser()
         props.history.push('/login')
     }
 
@@ -38,4 +40,10 @@ export function NavBar(props) {
     )
 }
 
-export default NavBar
+const mapStateToProps=state=>( {user: state.user})
+
+const mapDispatchToProps=dispatch =>{
+  return { removeUser: () => dispatch({type: "REMOVE_USER"})}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavBar)

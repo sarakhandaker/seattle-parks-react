@@ -71,8 +71,7 @@ export class UserHomeContainer extends Component {
 
     onRemovePark = id => {
         this.setState(prev =>
-            ({
-                user: {
+            ({user: {
                     ...prev.user,
                     saved_list: [...prev.user.saved_list.filter(park => park.id !== id)]
                 }
@@ -81,8 +80,7 @@ export class UserHomeContainer extends Component {
 
     onRemoveVisit = id => {
         this.setState(prev =>
-            ({
-                user: {
+            ({user: {
                     ...prev.user,
                     show_visits: [...prev.user.show_visits.filter(visit => visit.id !== id)]
                 }
@@ -116,13 +114,10 @@ export class UserHomeContainer extends Component {
                 </div>
 
                 <div className="row pb-3">
-
                     <div className="col">
                         {this.visitFormError()}
                         {show_visits ? <RatingsContainer onEdit={this.onEditRating} onRemove={this.onRemoveVisit} visits={show_visits.filter(v => v.completed)} /> : null}
                     </div>
-
-
                     <div className="col">
                             <h2>Saved Parks</h2>
                             <hr />
@@ -131,8 +126,6 @@ export class UserHomeContainer extends Component {
                         <hr />
                            {show_visits?<PlannedVisits onRemove={this.onRemoveVisit} visits={show_visits.filter(v=>!v.completed)}/>:null}
                     </div>
-
-
                 </div>
             </div >
         )
