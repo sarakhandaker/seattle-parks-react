@@ -296,3 +296,32 @@ color: #A4C3B2;
 .social:hover {
   color: #2A3C2B;
 }
+  /* ------------------------------------------------------
+----------------------Modal CSS--------------------------
+------------------------------------------------------ */
+
+.modal-dialog {
+  position: relative;
+  top: 15%;
+}
+
+.modal-div {
+  text-align: center;
+  font-size: large;
+  background-color: #A4C3B2;
+
+}
+
+.modal-div button{
+  margin-bottom: 10px;
+  margin-left: 10px;
+}
+
+.modal-div button a{
+  color: black;
+  font-size: medium;
+}
+
+.modal-div button:hover{
+  background-color: #DB7C00;
+}

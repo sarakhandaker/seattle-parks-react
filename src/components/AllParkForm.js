@@ -46,8 +46,13 @@ export class AllParkForm extends Component {
     }
 
     handleSubmit = (event) => {
+        const {search, features, neighborhood}=this.state
         event.preventDefault()
-        this.props.onSearch(this.state)
+        if (!search && neighborhood === "All" && features.length===0) {
+        }
+        else {
+            this.props.onSearch(this.state)
+        }
     }
 
     render() {

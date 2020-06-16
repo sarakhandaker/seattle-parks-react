@@ -14,6 +14,7 @@ export class UserHomeContainer extends Component {
         error: "",
         visitFormError: ""
     }
+
     componentDidMount() {
         api.auth.getUserProfile()
             .then(r => this.setState({ user: r.user, weather: r.weather }))
@@ -97,7 +98,7 @@ export class UserHomeContainer extends Component {
     }
 
     render() {
-        const { username, show_visits, saved_list, address } = this.state.user
+        const { username, show_visits, saved_list, address, visible } = this.state.user
         return (
             <div className="container">
                 <div className="row">
@@ -123,7 +124,7 @@ export class UserHomeContainer extends Component {
                             <SavedParksList onRemove={this.onRemovePark} parks={saved_list} />
                         <h2 style={{"paddingTop": "20px"}}>Planned Park Visits</h2>
                         <hr />
-                           {show_visits?<PlannedVisits onRemove={this.onRemoveVisit} visits={show_visits.filter(v=>!v.completed)}/>:null}
+                           {show_visits?<PlannedVisits visible={visible} closeModal={this.closeModal} onRemove={this.onRemoveVisit} visits={show_visits.filter(v=>!v.completed)}/>:null}
                     </div>
                 </div>
             </div >
