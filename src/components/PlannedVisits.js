@@ -10,14 +10,15 @@ export function PlannedVisits({ visits, onRemove }) {
     const [show, setShow] = useState(true);
     const handleClose = () => setShow(false);
 
-    visits.push({ date: "2020-06-10T00:00:00.000Z", park: "LICTON SPRINGS PARK", park_id: "209" })
+    // visits.push({ date: "2020-06-10T00:00:00.000Z", park: "LICTON SPRINGS PARK", park_id: "209" })
+    // visits.push({ date: "2020-06-10T00:00:00.000Z", park: "LICTON SPRINGS PARK", park_id: "209" })
 
     const handleDelete = id => {
         api.parks.deleteVisit(id)
         onRemove(id)
     }
 
-    const handleLink = id =>{
+    const handleLink = id => {
         handleDelete(id)
         setShow(false)
     }
@@ -30,7 +31,7 @@ export function PlannedVisits({ visits, onRemove }) {
                 if (newDate > new Date()) {
                     return <div className="row" key={index}>
                         <div className="col-md-auto">
-                            <Link to={`/parks/${visit.park_id}`}><h4 className= "link-text" style={{"color": "#2A3C2B"}}>{usefulFunctions.title(visit.park)}- {newDate.toLocaleDateString("en-US")}</h4> </Link> 
+                            <Link to={`/parks/${visit.park_id}`}><h4 className="link-text" style={{ "color": "#2A3C2B" }}>{usefulFunctions.title(visit.park)}- {newDate.toLocaleDateString("en-US")}</h4> </Link>
                         </div>
                         <div className="col text-right ">
                             <button onClick={() => handleDelete(visit.id)} className="btn-link delete">X</button>
@@ -38,14 +39,14 @@ export function PlannedVisits({ visits, onRemove }) {
                     </div>
                 }
                 else {
-                    return <Modal style={{opacity:1}} show={show} width="400" height="800" onHide={handleClose}>
+                    return <Modal style={{ opacity: 1 }} show={show} width="400" height="800" onHide={handleClose}>
                         <div className="modal-div">
-                        <Modal.Body> {`How was your visit to ${usefulFunctions.title(visit.park)} on ${newDate.toLocaleDateString("en-US")}?`}</Modal.Body>
-                        <hr/>
-                        <div className="row-md-auto p-3"><img className="bench" src="https://cdn.pixabay.com/photo/2018/09/21/22/46/silhouette-3694193_960_720.png" alt="Bench" style={{"height": "200px"}}/> </div>
-                        <hr/>
-                        <Button variant="light" onClick={() => handleLink(visit.id)}><Link to={`/parks/${visit.park_id}`}> Leave a Review </Link> </Button>
-                        <Button variant="light" onClick={() => handleLink(visit.id)}><Link to='/home'> Back to Homepage </Link></Button>
+                            <div className="row-md-auto p-3"><img className="bench" src="https://cdn.pixabay.com/photo/2018/09/21/22/46/silhouette-3694193_960_720.png" alt="Bench" style={{ "height": "200px" }} /> </div>
+                            <hr />
+                            <Modal.Body> {`How was your visit to ${usefulFunctions.title(visit.park)} on ${newDate.toLocaleDateString("en-US")}?`}</Modal.Body>
+                            <hr />
+                            <Button variant="light" onClick={() => handleLink(visit.id)}><Link to={`/parks/${visit.park_id}`}> Leave a Review </Link> </Button>
+                            <Button variant="light" onClick={() => handleLink(visit.id)}><Link to='/home'> Back to Homepage </Link></Button>
                         </div>
                     </Modal>
                 }

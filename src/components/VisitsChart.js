@@ -22,7 +22,7 @@ export default class Stats extends Component {
         keys.map(key=> data.push({x: moment(key), y: mapData[key]}))
 
         new Chart(myChartRef, {
-            type: "line",
+            type: "bar",
             data: {datasets: [{
                 backgroundColor: 'orange',
                 borderColor: '#A4C3B2',
@@ -58,7 +58,8 @@ export default class Stats extends Component {
                         },
                         ticks: {
                             fontSize: 18,
-                            min: moment()
+                            min: moment(),
+                            max: moment().add(30, 'days')
                         }
                     }]
                 }

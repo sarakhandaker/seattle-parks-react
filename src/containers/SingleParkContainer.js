@@ -13,7 +13,7 @@ import { connect } from 'react-redux'
 export class SingleParkContainer extends Component {
 
   state = {
-    park: {},
+    park: "",
     form: false,
     planForm: false,
     saved: false,
@@ -79,7 +79,7 @@ export class SingleParkContainer extends Component {
   }
 
   render() {
-    if (!this.state.park.name) { return <div className="container"><h1> NO PARK FOUND </h1></div> }
+    if (!this.state.park) { return <div className="container"><h1> NO PARK FOUND </h1></div> }
     const { name, show_features, seedAddress, show_visits, neigh, latitude, longitude } = this.state.park
     let ratings = show_visits.filter(v => v.completed)
     const { user } = this.props
