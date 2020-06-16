@@ -325,3 +325,7 @@ color: #A4C3B2;
 .modal-div button:hover{
   background-color: #DB7C00;
 }
+
+.link-text:hover{
+  color: #DB7C00 !important;
+}

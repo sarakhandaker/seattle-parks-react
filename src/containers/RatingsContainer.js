@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Rating from '../components/Rating'
 import { api } from '../services/api'
+import {Link} from 'react-router-dom'
 
 export class RatingsContainer extends Component {
 
@@ -29,7 +30,7 @@ export class RatingsContainer extends Component {
             <div key={id}>
                 <div className="row">
                     <div className="col">
-                        {!this.props.parkPage ? <h4>Park: {visit.park}</h4> : null}
+                        {!this.props.parkPage ?  <Link to={`/parks/${visit.park_id}`}><h4 className= "link-text" style={{"color": "#2A3C2B"}}>Park: {visit.park}</h4></Link> : null}
                         <Rating onEdit={this.onSubmit} key={id} edit={this.state.id === visit.id ? true : false} visit={visit} />
                     </div>
                 </div>

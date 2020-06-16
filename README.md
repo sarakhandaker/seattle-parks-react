@@ -1,9 +1,27 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# README
 
-## Available Scripts
+## Project Description
 
-In the project directory, you can run:
+This Seattle Parks Application offers information on parks in the city of Seattle. This application will allow users to keep a record of all their trips, plan future trips and read about trips other people have taken. 
 
+This application hopes to inspire users to explore new parks in the city while staying safe during COVID-19.
+
+## GitHub Repos
+* Front-end: https://github.com/sarakhandaker/seattle-parks-react
+* Back-end: https://github.com/sarakhandaker/seattle-parks-rails
+
+## Technologies Used
+This project uses Ruby and Rails with a postgres database on the back-end, and JavaScript, React, Redux, CSS and HTML on the front-end with JWT for authentication.
+* GeoCoder for geolocating
+* Bootstrap for CSS 
+* Chart.js for Graphs 
+* Google Maps
+* Weather API: https://www.metaweather.com/
+    * woeid=2490383 for Seattle, WA
+* Data from: http://data-seattlecitygis.opendata.arcgis.com/
+* Ruby version '2.6.1'
+
+## To Start
 ### `yarn start`
 
 Runs the app in the development mode.<br />
@@ -12,57 +30,42 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
 
-### `yarn test`
+## User Stories
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+* Account
+    * User can login/ signup to the site (with authentication and validations)
+    * User can edit their account information
 
-### `yarn build`
+* Parks
+    * User can see a list of Seattle Parks (With Maps)
+    * User can filter through parks by neighbouhood, features, /already visited
+    * User can see a specific Park and its details 
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+* Saved List
+    * User can save parks they want to visit 
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+* Visits
+    * User can post a new visit to a park (with comments, rating)
+    * User can plan a visit in the future
+    * User can see and edit all past visits
+    * User can delete a visit
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+* Weather
+    * User can see the upcoming weather 
 
-### `yarn eject`
+* Data 
+    * /User can see the busiest parks (density)
+    * /User can see data on visits vs weather 
+    * User can see what percentage of the parks they have visited
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Trello 
+https://trello.com/b/BQ3YuPcK/mod-5-project
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Future Updates
+* Google Maps Direction
+* Extras: Admin Account, notifications, new user walkthrough, share on social media, sounds, file uploads
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## License
+This project is licensed under the GNU General Public License.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
