@@ -4,9 +4,9 @@ import Kerry from '../images/kerry-park.jpg'
 
 export function About () {
         return (
-            <div class="container section">
-                <div class="row">
-                    <div class="col-md-6">
+            <div className="container section">
+                <div className="row">
+                    <div className="col-md-6">
                         <h3>
                             About Seattle Parks
                     </h3>
@@ -14,15 +14,15 @@ export function About () {
                         This application hopes to inspire users to explore new parks in the city while staying safe during COVID-19.</p>
                         <p> This application allows users to see a list of park in the Seattle area and filter through them on location, name and features. Users can login/ signup to keep a list of saved parks and submit reviews.</p>
                     </div>
-                    <div class="col-md-6">
+                    <div className="col-md-6">
                         <img src={FallPark} alt="Greenlake Park" />
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-6">
+                <div className="row">
+                    <div className="col-md-6">
                         <img src={Kerry} alt="Kerry Park View" />
                     </div>
-                    <div class="col-md-6">
+                    <div className="col-md-6">
                         <h3>
                             About the Developer
                     </h3>
