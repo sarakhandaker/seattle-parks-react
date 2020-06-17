@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 export class VisitForm extends Component {
     state= {
-        date: new Date().toISOString().substr(0,10),
+        date: new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000).toISOString().substr(0,10),
         comment: "",
         rating: "",
         completed: true

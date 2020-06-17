@@ -1,34 +1,36 @@
 //npm install chart.js --save
 import Chart from 'chart.js';
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import classes from "./Stats.css";
 import moment from 'moment'
 
 Chart.defaults.global.legend.display = false;
 
-export default class Stats extends Component {
+export default class Stats extends PureComponent {
     chartRef = React.createRef();
 
-    componentDidMount() {
-        let data=[]
+    makeChart() {
+        let data = []
         const myChartRef = this.chartRef.current.getContext("2d");
-        let mapData={}
-        let visits=this.props.visits
-        for (let i=0; i<visits.length; i++){
-           mapData[visits[i].date]? mapData[visits[i].date]+=1 : mapData[visits[i].date]=1
+        let mapData = {}
+        let visits = this.props.visits
+        for (let i = 0; i < visits.length; i++) {
+            mapData[visits[i].date] ? mapData[visits[i].date] += 1 : mapData[visits[i].date] = 1
         }
         const keys = Object.keys(mapData)
 
-        keys.map(key=> data.push({x: moment(key), y: mapData[key]}))
+        keys.map(key => data.push({ x: moment(key).add(1, "days"), y: mapData[key] }))
 
         new Chart(myChartRef, {
             type: "bar",
-            data: {datasets: [{
-                backgroundColor: 'orange',
-                borderColor: '#A4C3B2',
-                fill: false,
-                data: data
-            }]},
+            data: {
+                datasets: [{
+                    backgroundColor: 'orange',
+                    borderColor: '#A4C3B2',
+                    fill: false,
+                    data: data
+                }]
+            },
             options: {
                 title: {
                     text: "Planned Future Visits by Users",
@@ -41,7 +43,7 @@ export default class Stats extends Component {
                         scaleLabel: {
                             display: true,
                             labelString: 'Number of Users'
-                          },
+                        },
                         ticks: {
                             fontSize: 15,
                             min: 0,
@@ -52,9 +54,7 @@ export default class Stats extends Component {
                         type: 'time',
                         time: {
                             unit: 'day',
-                            displayFormats: {
-                                day: 'MMM D'
-                            }
+                            displayFormats: { day: 'MMM D' }
                         },
                         ticks: {
                             fontSize: 18,
@@ -64,7 +64,14 @@ export default class Stats extends Component {
                     }]
                 }
             }
-        });
+        })
+    }
+
+    componentDidMount() {
+        this.makeChart()
+    }
+    componentDidUpdate() {
+        this.makeChart()
     }
     render() {
         return (

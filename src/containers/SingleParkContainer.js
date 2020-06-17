@@ -34,11 +34,11 @@ export class SingleParkContainer extends Component {
   }
 
   onSubmit = (data, plan) => {
-    if (!plan && (new Date() - new Date(data.visit.date)) < 0) {
+    if (!plan && (new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000) - new Date(data.visit.date)) < 0) {
       this.setState({ error: { date: "cannot be in the future" } })
       return
     }
-    else if (plan && (new Date() - new Date(data.visit.date)) > 0) {
+    else if (plan && (new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000) - new Date(data.visit.date)) > 0) {
       this.setState({ error: { date: "cannot be in the past" } })
       return
     }
