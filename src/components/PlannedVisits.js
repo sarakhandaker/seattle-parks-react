@@ -10,7 +10,7 @@ export function PlannedVisits({ visits, onRemove }) {
     const [show, setShow] = useState(true);
     const handleClose = () => setShow(false);
 
-    visits.push({ date: "2020-06-10T00:00:00.000Z", park: "LICTON SPRINGS PARK", park_id: "209" })
+    // visits.push({ date: "2020-06-10T00:00:00.000Z", park: "LICTON SPRINGS PARK", park_id: "209" })
 
     const handleDelete = id => {
         api.parks.deleteVisit(id)
