@@ -54,7 +54,7 @@ You will also see any lint errors in the console.
     * User can see the upcoming weather 
 
 * Data 
-    * /User can see the busiest parks (density)
+    * User can see the busiest parks (density)
     * /User can see data on visits vs weather 
     * User can see what percentage of the parks they have visited
 

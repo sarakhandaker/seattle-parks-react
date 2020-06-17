@@ -10,8 +10,7 @@ export function PlannedVisits({ visits, onRemove }) {
     const [show, setShow] = useState(true);
     const handleClose = () => setShow(false);
 
-    // visits.push({ date: "2020-06-10T00:00:00.000Z", park: "LICTON SPRINGS PARK", park_id: "209" })
-    // visits.push({ date: "2020-06-10T00:00:00.000Z", park: "LICTON SPRINGS PARK", park_id: "209" })
+    visits.push({ date: "2020-06-10T00:00:00.000Z", park: "LICTON SPRINGS PARK", park_id: "209" })
 
     const handleDelete = id => {
         api.parks.deleteVisit(id)
@@ -22,6 +21,8 @@ export function PlannedVisits({ visits, onRemove }) {
         handleDelete(id)
         setShow(false)
     }
+
+    let first=true
 
     if (visits) {
         if (visits.length) {
@@ -38,7 +39,8 @@ export function PlannedVisits({ visits, onRemove }) {
                         </div>
                     </div>
                 }
-                else {
+                else if (first){
+                    first =false
                     return <Modal style={{ opacity: 1 }} show={show} width="400" height="800" onHide={handleClose}>
                         <div className="modal-div">
                             <div className="row-md-auto p-3"><img className="bench" src="https://cdn.pixabay.com/photo/2018/09/21/22/46/silhouette-3694193_960_720.png" alt="Bench" style={{ "height": "200px" }} /> </div>

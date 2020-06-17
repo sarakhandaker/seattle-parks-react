@@ -52,10 +52,32 @@ export class ParksContainer extends Component {
         }
     }
 
+    maxRating=()=>{
+        if (this.props.parks.length){
+       const ratings= this.props.parks.map(park=> park.avg_rating)
+       const max= Math.max(... ratings)
+       const park= this.props.parks.find(park=> park.avg_rating===max)
+       return `${park.name} is the highest rated park at ${max} average stars!`
+        }
+    }
+
+    maxVisits=()=>{
+        if (this.props.parks.length){
+            const visits= this.props.parks.map(park=> park.visit_length)
+            const max= Math.max(... visits)
+            const park= this.props.parks.find(park=> park.avg_rating===max)
+            return `${park.name} is the busiest park with the most visits!`
+             }
+    }
+
     render() {
         const { displaySection, search } = this.state
         return (
             <div className="container">
+                <div className="row-md-auto pb-5" >
+                    <div className="alert alert-danger" role="alert">{this.props.requesting ? <h2>Loading...</h2> : null}{ this.maxVisits()}</div>
+                    <div className="alert alert-success" role="alert"> {this.props.requesting ? <h2>Loading...</h2> : null}{ this.maxRating()}</div>
+                </div>
                 <div className="row pb-5" >
                     <div className="col-lg-6 col-md-6 col-sm-6 singlepark" style={{ "minHeight": "500px" }}>
                         <AllParksForm onSearch={this.onSubmit} />
