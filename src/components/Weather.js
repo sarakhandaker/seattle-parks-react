@@ -10,8 +10,6 @@ export function Weather({ weather }) {
 
     return (
         <>
-            <div className="col-md-3"></div>
-            <div className="col-md-3">
                 <div className="panel panel-default weather-panel">
                     <div className="panel-heading">Current Seattle Weather<br /><small className="supersmall">{weather ? weather[0]['applicable_date'] : null}</small></div>
                     <div className="row">
@@ -23,9 +21,6 @@ export function Weather({ weather }) {
                         </div>
                     </div>
                 </div>
-            </div>
-            <div className="col-md-3"></div>
-            <div className="col-md-3"></div>
         </>
     )
 }

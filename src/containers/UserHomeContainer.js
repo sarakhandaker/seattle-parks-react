@@ -6,6 +6,9 @@ import SavedParksList from '../components/SavedParksList'
 import RatingsContainer from '../containers/RatingsContainer'
 import PlannedVisits from '../components/PlannedVisits'
 import { api } from '../services/api'
+import { Calendar, momentLocalizer } from "react-big-calendar";
+import moment from "moment";
+import "react-big-calendar/lib/css/react-big-calendar.css";
 
 export class UserHomeContainer extends Component {
     state = {
@@ -72,7 +75,8 @@ export class UserHomeContainer extends Component {
 
     onRemovePark = id => {
         this.setState(prev =>
-            ({user: {
+            ({
+                user: {
                     ...prev.user,
                     saved_list: [...prev.user.saved_list.filter(park => park.id !== id)]
                 }
@@ -81,7 +85,8 @@ export class UserHomeContainer extends Component {
 
     onRemoveVisit = id => {
         this.setState(prev =>
-            ({user: {
+            ({
+                user: {
                     ...prev.user,
                     show_visits: [...prev.user.show_visits.filter(visit => visit.id !== id)]
                 }
@@ -90,7 +95,7 @@ export class UserHomeContainer extends Component {
 
     parksPercentage = () => {
         if (this.state.user.show_visits) {
-            let parks = this.state.user.show_visits.filter(v=> v.completed).map(v => v.park)
+            let parks = this.state.user.show_visits.filter(v => v.completed).map(v => v.park)
             let numParks = [...new Set(parks)].length
             var per = (numParks / 4.11).toFixed(2)
             return <p className="lead mb-0">{`You have visited ${per}% of all Seattle Parks!`}</p>
@@ -101,8 +106,8 @@ export class UserHomeContainer extends Component {
         const { username, show_visits, saved_list, address, visible } = this.state.user
         return (
             <div className="container">
-                <div className="row">
-                    <div className="col-6 text-left">
+                <div className="row pb-3">
+                    <div className="col text-left">
                         <h1 className="display-4">Welcome {username}</h1>
                         {this.parksPercentage()}
                         <h3 className="mb-4"> <i className="fa fa-map-marker mr-2"></i>{address}</h3>
@@ -110,7 +115,18 @@ export class UserHomeContainer extends Component {
                         {this.state.editUser && username ? <UserEditForm onSubmit={this.onSubmit} user={this.state.user} /> : null}
                         {this.state.editUser ? this.formErrors() : null}
                     </div>
+                    <div className="col-6">
+                    <Calendar
+                        localizer={momentLocalizer(moment)}
+                        defaultDate={new Date()}
+                        defaultView="month"
+                        events={show_visits ? show_visits.map(v => ({ allDay: true, start: moment(v.date).add(1, "days").toDate(), end: moment(v.date).add(1, "days").toDate(), title: v.park })) : []}
+                        style={{ height: "350px" }}
+                    />
+                    </div>
+                    <div className="col">
                     <Weather weather={this.state.weather} />
+                    </div>
                 </div>
 
                 <div className="row pb-3">
@@ -119,12 +135,12 @@ export class UserHomeContainer extends Component {
                         {show_visits ? <RatingsContainer onEdit={this.onEditRating} onRemove={this.onRemoveVisit} visits={show_visits.filter(v => v.completed)} /> : null}
                     </div>
                     <div className="col">
-                            <h2>Saved Parks</h2>
-                            <hr />
-                            <SavedParksList onRemove={this.onRemovePark} parks={saved_list} />
-                        <h2 style={{"paddingTop": "20px"}}>Planned Park Visits</h2>
+                        <h2>Saved Parks</h2>
                         <hr />
-                           {show_visits?<PlannedVisits visible={visible} closeModal={this.closeModal} onRemove={this.onRemoveVisit} visits={show_visits.filter(v=>!v.completed)}/>:null}
+                        <SavedParksList onRemove={this.onRemovePark} parks={saved_list} />
+                        <h2 style={{ "paddingTop": "20px" }}>Planned Park Visits</h2>
+                        <hr />
+                        {show_visits ? <PlannedVisits visible={visible} closeModal={this.closeModal} onRemove={this.onRemoveVisit} visits={show_visits.filter(v => !v.completed)} /> : null}
                     </div>
                 </div>
             </div >

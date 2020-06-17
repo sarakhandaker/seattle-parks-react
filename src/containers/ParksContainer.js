@@ -55,7 +55,7 @@ export class ParksContainer extends Component {
     maxRating=()=>{
         if (this.props.parks.length){
        const ratings= this.props.parks.map(park=> park.avg_rating)
-       const max= Math.max(... ratings)
+       const max= Math.max(...ratings)
        const park= this.props.parks.find(park=> park.avg_rating===max)
        return `${park.name} is the highest rated park at ${max} average stars!`
         }
@@ -64,7 +64,7 @@ export class ParksContainer extends Component {
     maxVisits=()=>{
         if (this.props.parks.length){
             const visits= this.props.parks.map(park=> park.visit_length)
-            const max= Math.max(... visits)
+            const max= Math.max(...visits)
             const park= this.props.parks.find(park=> park.avg_rating===max)
             return `${park.name} is the busiest park with the most visits!`
              }
