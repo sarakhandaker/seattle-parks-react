@@ -66,7 +66,7 @@ export class ParksContainer extends Component {
             const visits= this.props.parks.map(park=> park.visit_length)
             const max= Math.max(...visits)
             const park= this.props.parks.find(park=> park.visit_length===max)
-            return `${park.name} is the busiest park with the most visits!`
+            return `${park.name} is the busiest park on this site with the most visits!`
              }
     }
 
