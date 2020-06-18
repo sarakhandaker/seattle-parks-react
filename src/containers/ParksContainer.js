@@ -63,7 +63,6 @@ export class ParksContainer extends Component {
 
     maxVisits=()=>{
         if (this.props.parks.length){
-            debugger
             const visits= this.props.parks.map(park=> park.visit_length)
             const max= Math.max(...visits)
             const park= this.props.parks.find(park=> park.visit_length===max)
