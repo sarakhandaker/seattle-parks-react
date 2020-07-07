@@ -11,6 +11,7 @@ export function Weather({ weather }) {
     return (
         <>
                 <div className="panel panel-default weather-panel">
+               {symb==="c" || symb=== "lc"? <div className="alert alert-danger" role="alert"><h2>It's nice out, parks may be busier than usual!</h2></div>: null}
                     <div className="panel-heading">Current Seattle Weather<br /><small className="supersmall">{weather ? weather[0]['applicable_date'] : null}</small></div>
                     <div className="row">
                         <div className="col-sm-6 wi">{weather ? <img src={`https://www.metaweather.com/static/img/weather/png/64/${symb}.png`} alt="weather" /> : null}</div>
