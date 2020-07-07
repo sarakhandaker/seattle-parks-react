@@ -28,7 +28,8 @@ export class AllParkForm extends Component {
     state = {
         search: "",
         features: [],
-        neighborhood: "All"
+        neighborhood: "All",
+        show: false
     }
 
     handleChange = (event) => {
@@ -55,8 +56,12 @@ export class AllParkForm extends Component {
         }
     }
 
+    showFeature=()=>{
+        this.setState({show: true})
+    }
+
     render() {
-        const { search } = this.state
+        const { search, show } = this.state
         return (
             <div >
                 <form className="form-horizontal" onSubmit={(e) => this.handleSubmit(e)}>
@@ -69,9 +74,9 @@ export class AllParkForm extends Component {
                     </div>
                     <div className="form-group">
                         <label className="col-md-4 control-label">Search By Features</label>
-                        <div className="col">
+                        {show? <div className="col">
                             {FEATURESALL.sort().map((feat, index) => <label key={index} className="checkbox-inline"><input onChange={(e) => this.handleChangefeatures(e)} type="checkbox" name="checkboxes" value={feat} />{feat}</label>)}
-                        </div>
+                        </div> : <button onClick={this.showFeature} className="btn btn-light">Show Features</button>}
                     </div>
                     <div className="form-group">
                         <label className="col-md-4 control-label">Search by Neighborhood</label>

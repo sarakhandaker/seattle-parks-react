@@ -49,7 +49,7 @@ export class UserHomeContainer extends Component {
                 else {
                     let newVisits = user.show_visits.map(visit => {
                         if (res.id === visit.id) {
-                            visit = res
+                            visit = {...res, park: visit.park}
                             visit.username = user.username
                         }
                         return visit
