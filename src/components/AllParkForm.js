@@ -57,7 +57,7 @@ export class AllParkForm extends Component {
     }
 
     showFeature=()=>{
-        this.setState({show: true})
+        this.setState({show: !this.state.show})
     }
 
     render() {
@@ -76,7 +76,7 @@ export class AllParkForm extends Component {
                         <label className="col-md-4 control-label">Search By Features</label>
                         {show? <div className="col">
                             {FEATURESALL.sort().map((feat, index) => <label key={index} className="checkbox-inline"><input onChange={(e) => this.handleChangefeatures(e)} type="checkbox" name="checkboxes" value={feat} />{feat}</label>)}
-                        </div> : <button onClick={this.showFeature} className="btn btn-light">Show Features</button>}
+                            <button onClick={this.showFeature} className="btn btn-light">Close Features</button></div> : <button onClick={this.showFeature} className="btn btn-light">Show Features</button>}
                     </div>
                     <div className="form-group">
                         <label className="col-md-4 control-label">Search by Neighborhood</label>
