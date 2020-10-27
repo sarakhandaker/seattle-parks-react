@@ -1,5 +1,6 @@
 import React from 'react'
 import EditVisitForm from '../components/EditVisitForm'
+import Tree from '../images/tree.png'
 
 export function Rating ({visit, onEdit, edit}) {
   const {comment, username, date}= visit
@@ -23,7 +24,7 @@ export function Rating ({visit, onEdit, edit}) {
       <>
       <div className= "row pb-3 rating">
         <div className="col-sm-3 pt-3">
-          <img src="http://res.freestockphotos.biz/pictures/15/15119-illustration-of-a-tree-silhouette-pv.png" alt="User" className="img-rounded" style={{"height": "60px"}}/>
+          <img src={Tree} alt="User" className="img-rounded" style={{"height": "60px"}}/>
           <div className="review-block-date">{newDate}<br />{ daysAgo()} day(s) ago</div>
         </div>
         <div className="col-sm-9 pt-3">
