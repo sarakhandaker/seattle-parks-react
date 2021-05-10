@@ -19,13 +19,9 @@ export class ParksContainer extends Component {
 
         let newArray = this.props.parks
 
-        if (neighborhood !== "All") {
-            newArray = newArray.filter(park => park.neighborhood === neighborhood)
-        }
+        if (neighborhood !== "All") newArray = newArray.filter(park => park.neighborhood === neighborhood)
 
-        if (search) {
-            newArray = newArray.filter(park => park.name.includes(search.toUpperCase()))
-        }
+        if (search) newArray = newArray.filter(park => park.name.includes(search.toUpperCase()))
 
         features.forEach(feat => {
             newArray = newArray.filter(park => park.features.map(f => f.name).includes(feat))
