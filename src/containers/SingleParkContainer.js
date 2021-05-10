@@ -155,7 +155,7 @@ export class SingleParkContainer extends Component {
             {this.formErrors()}
           </div>
         </div>
-        <VisitsChart visits={show_visits.filter(v => !v.completed)} />
+        {/* <VisitsChart visits={show_visits.filter(v => !v.completed)} /> */}
       </div>
     )
   }
