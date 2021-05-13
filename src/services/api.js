@@ -77,7 +77,7 @@ const deleteVisit=id=>{
 }
 
 const getParks=()=>{
-    return fetch(`${API_ROOT}/api/v1/parks/?page=1`,{headers: headers()})
+    return fetch(`${API_ROOT}/api/v1/parks`,{headers: headers()})
         .then(r=>r.json())
 }
 
