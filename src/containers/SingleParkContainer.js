@@ -5,7 +5,6 @@ import VisitForm from '../components/VisitForm'
 import PlanVisitForm from '../components/PlanVisitForm'
 import RatingAvg from '../components/RatingAvg'
 import { api } from '../services/api'
-import VisitsChart from '../components/VisitsChart'
 import { usefulFunctions } from '../services/usefulFunctions'
 import { connect } from 'react-redux'
 
@@ -155,7 +154,6 @@ export class SingleParkContainer extends Component {
             {this.formErrors()}
           </div>
         </div>
-        {/* <VisitsChart visits={show_visits.filter(v => !v.completed)} /> */}
       </div>
     )
   }
