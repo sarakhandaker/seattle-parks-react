@@ -69,3 +69,9 @@ https://trello.com/b/BQ3YuPcK/mod-5-project
 This project is licensed under the GNU General Public License.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+
+
+to do:
+sort the parks alphabetically
+fix search parks
