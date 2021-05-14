@@ -21,6 +21,7 @@ export class ParksContainer extends Component {
             feat: features
         }
         this.props.searchParks(searchParams)
+        this.setState({ search: true })
     }
 
     handleNext = () => {
