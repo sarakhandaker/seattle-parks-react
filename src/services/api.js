@@ -1,5 +1,5 @@
 // const API_ROOT = `https://seattle-parks-api.herokuapp.com`;
-const API_ROOT='http://localhost:3000'
+const API_ROOT = 'http://localhost:3000'
 
 const token = () => localStorage.getItem("token");
 
@@ -12,96 +12,103 @@ const headers = () => {
 };
 
 const login = data => {
-    return fetch(`${API_ROOT}/api/v1/login`, {
-        method: 'POST',
-        headers: headers(),
-        body: JSON.stringify(data)
-    })
-        .then(r => r.json())
-}
-
-const signup = data => {
-    return fetch(`${API_ROOT}/api/v1/users`, {
-        method: 'POST',
-        headers: headers(),
-        body: JSON.stringify(data)
-    })
-        .then(r => r.json())
-}
-
-const check_user = () => {
-    return fetch(`${API_ROOT}/check_user`, {
-        headers: headers()})
+  return fetch(`${API_ROOT}/api/v1/login`, {
+    method: 'POST',
+    headers: headers(),
+    body: JSON.stringify(data)
+  })
     .then(r => r.json())
 }
 
-const getUserProfile=()=>{
-    return fetch(`${API_ROOT}/api/v1/profile`, {
-        headers: headers()
-    })
-        .then(r => r.json())
+const signup = data => {
+  return fetch(`${API_ROOT}/api/v1/users`, {
+    method: 'POST',
+    headers: headers(),
+    body: JSON.stringify(data)
+  })
+    .then(r => r.json())
 }
 
-const editUser=(data, id)=>{
-   return fetch(`${API_ROOT}/api/v1/users/${id}`, {
-        method: 'PATCH',
-        headers: headers(),
-        body: JSON.stringify(data)
-    })
-        .then(r => r.json())
+const check_user = () => {
+  return fetch(`${API_ROOT}/check_user`, {
+    headers: headers()
+  })
+    .then(r => r.json())
 }
 
-const postVisit=data=>{
-    return fetch(`${API_ROOT}/api/v1/visits`, {
-        method: 'POST',
-        headers: headers(),
-        body: JSON.stringify(data)
-      })
-        .then(r => r.json())
+const getUserProfile = () => {
+  return fetch(`${API_ROOT}/api/v1/profile`, {
+    headers: headers()
+  })
+    .then(r => r.json())
 }
 
-const editVisit=(data, id)=>{
+const editUser = (data, id) => {
+  return fetch(`${API_ROOT}/api/v1/users/${id}`, {
+    method: 'PATCH',
+    headers: headers(),
+    body: JSON.stringify(data)
+  })
+    .then(r => r.json())
+}
+
+const postVisit = data => {
+  return fetch(`${API_ROOT}/api/v1/visits`, {
+    method: 'POST',
+    headers: headers(),
+    body: JSON.stringify(data)
+  })
+    .then(r => r.json())
+}
+
+const editVisit = (data, id) => {
   return fetch(`${API_ROOT}/api/v1/visits/${id}`, {
-       method: 'PATCH',
-       headers: headers(),
-       body: JSON.stringify(data)
-   })
-       .then(r => r.json())
+    method: 'PATCH',
+    headers: headers(),
+    body: JSON.stringify(data)
+  })
+    .then(r => r.json())
 }
 
-const deleteVisit=id=>{
+const deleteVisit = id => {
   fetch(`${API_ROOT}/api/v1/visit/${id}`, {
-      method: `DELETE`,
-      headers: headers()
-          })
+    method: `DELETE`,
+    headers: headers()
+  })
 }
 
-const getParks=page=>{
-    return fetch(`${API_ROOT}/api/v1/parks/?page=${page}`,{headers: headers()})
-        .then(r=>r.json())
+const getParks = page => {
+  return fetch(`${API_ROOT}/api/v1/parks/?page=${page}`, { headers: headers() })
+    .then(r => r.json())
 }
 
-const getSinglePark=id=>{
-   return fetch(`${API_ROOT}/api/v1/parks/` + id, {
-        method: "GET",
-        headers: headers(),
-      })
-        .then(r => r.json())
+const searchParks = searchParams => {
+  return fetch(`${API_ROOT}/api/v1/searchparks/?name=${searchParams.name}&neigh=${searchParams.neigh}&feat=${searchParams.feat}`
+    , { headers: headers() })
+    .then(r => r.json())
 }
 
-const postSavedPark=data=>{
-    return fetch(`${API_ROOT}/api/v1/saved_park`, {
-        method: 'POST',
-        headers: headers(),
-        body: JSON.stringify(data)
-      })
+const getSinglePark = id => {
+  return fetch(`${API_ROOT}/api/v1/parks/` + id, {
+    method: "GET",
+    headers: headers(),
+  })
+    .then(r => r.json())
 }
 
-const deleteSavedPark=id=>{
-    fetch(`${API_ROOT}/api/v1/saved_park/${id}`, {
-        method: `DELETE`,
-        headers: headers()
-            })
+const postSavedPark = data => {
+  return fetch(`${API_ROOT}/api/v1/saved_park`, {
+    method: 'POST',
+    headers: headers(),
+    body: JSON.stringify(data)
+  })
+}
+
+const deleteSavedPark = id => {
+  fetch(`${API_ROOT}/api/v1/saved_park/${id}`, {
+    method: `DELETE`,
+    headers: headers()
+  })
 }
 
 export const api = {
@@ -119,6 +126,7 @@ export const api = {
     postVisit,
     editVisit,
     postSavedPark,
-    getParks
+    getParks,
+    searchParks
   }
 };
