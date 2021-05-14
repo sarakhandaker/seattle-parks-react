@@ -7,12 +7,12 @@ import { fetchParks } from '../actions/fetchParks'
 
 export class ParksContainer extends Component {
     state = {
+        page: 1,
         displaySection: [],
-        index: 0,
         search: false
     }
     componentDidMount() {
-        this.props.fetchParks()
+        this.props.fetchParks(1)
     }
 
     onSubmit = ({ search, features, neighborhood }) => {
@@ -31,19 +31,19 @@ export class ParksContainer extends Component {
     }
 
     handleNext = () => {
-        if (this.state.index + 30 < 411) {
+        if (this.state.page < 14) {
+            this.props.fetchParks(this.state.page+1)
             this.setState(prev => ({
-                index: prev.index + 30,
-                displaySection: this.props.parks.slice(prev.index + 30, prev.index + 60)
+                page: prev.page + 1
             }))
         }
     }
 
     handlePrevious = () => {
-        if (this.state.index - 60 >= 0) {
+        if (this.state.page > 1) {
+            this.props.fetchParks(this.state.page-1)
             this.setState(prev => ({
-                index: prev.index - 30,
-                displaySection: this.props.parks.slice(prev.index - 60, prev.index - 30)
+                page: prev.page - 1
             }))
         }
     }
@@ -88,7 +88,7 @@ export class ParksContainer extends Component {
 }
 
 function mapDispatchToProps(dispatch) {
-    return { fetchParks: () => dispatch(fetchParks()) }
+    return { fetchParks: (page) => dispatch(fetchParks(page)) }
 }
 
 function mapStateToProps(state) {

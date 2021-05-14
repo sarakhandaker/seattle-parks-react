@@ -1,9 +1,9 @@
 import {api} from '../services/api'
 
-export function fetchParks() {
+export function fetchParks(page) {
     return (dispatch) => {
       dispatch({ type: 'START_ADDING_PARKS_REQUEST' });
-        api.parks.getParks()
+        api.parks.getParks(page)
         .then(parks => dispatch({ type: 'ADD_PARKS', parks: parks }));
     };
   }

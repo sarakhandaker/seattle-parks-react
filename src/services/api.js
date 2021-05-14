@@ -1,5 +1,5 @@
-const API_ROOT = `https://seattle-parks-api.herokuapp.com`;
-// const API_ROOT='http://localhost:3000'
+// const API_ROOT = `https://seattle-parks-api.herokuapp.com`;
+const API_ROOT='http://localhost:3000'
 
 const token = () => localStorage.getItem("token");
 
@@ -76,8 +76,8 @@ const deleteVisit=id=>{
           })
 }
 
-const getParks=()=>{
-    return fetch(`${API_ROOT}/api/v1/parks`,{headers: headers()})
+const getParks=page=>{
+    return fetch(`${API_ROOT}/api/v1/parks/?page=${page}`,{headers: headers()})
         .then(r=>r.json())
 }
 
